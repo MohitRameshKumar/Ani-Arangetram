@@ -1,0 +1,393 @@
+/**
+ * render.js — reads CONTENT (from content.js) and fills in the parts of each
+ * page that are driven by data: the header/footer, the hero, the event strip,
+ * the program list, artist cards, the gallery grid, and blessing cards.
+ * Each page's <body data-page="..."> attribute tells this file which nav item
+ * to mark current and which section renderers to run.
+ */
+
+const NAV_ITEMS = [
+  { href: "index.html", label: "Home", page: "home" },
+  { href: "about.html", label: "About", page: "about" },
+  { href: "program.html", label: "Program", page: "program" },
+  { href: "artists.html", label: "Artists", page: "artists" },
+  { href: "guru.html", label: "Guru", page: "guru" },
+  { href: "gallery.html", label: "Gallery", page: "gallery" },
+  { href: "chief-guest.html", label: "Chief Guest", page: "chief-guest" },
+  { href: "blessings.html", label: "Blessings", page: "blessings" },
+  { href: "contact.html", label: "Contact", page: "contact" },
+];
+
+function talaRingMarkup(activeIndex) {
+  activeIndex = activeIndex || 0;
+  let ticks = "";
+  for (let i = 0; i < 8; i++) {
+    const classes = ["tala-ring__tick"];
+    if (i === 0) classes.push("is-sam");
+    if (i === activeIndex) classes.push("is-active");
+    ticks += `<span class="${classes.join(" ")}"></span>`;
+  }
+  return `
+    <span class="tala-ring" data-count="8" aria-hidden="true">
+      <span class="tala-ring__hub"></span>
+      ${ticks}
+    </span>`;
+}
+
+function renderHeader() {
+  const mount = document.getElementById("site-header");
+  if (!mount) return;
+  const page = document.body.getAttribute("data-page");
+  const navLinks = NAV_ITEMS.map(
+    (item) =>
+      `<li><a href="${item.href}"${item.page === page ? ' aria-current="page"' : ""}>${item.label}</a></li>`
+  ).join("");
+  mount.innerHTML = `
+    <div class="container header-grid">
+      <a class="wordmark" href="index.html">
+        <span class="wordmark__mark"></span>
+        <span class="wordmark__text">${CONTENT.theme.titleDisplay}</span>
+      </a>
+      <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
+        <div class="nav-drawer__top">
+          <span class="wordmark"><span class="wordmark__mark"></span><span class="wordmark__text">${CONTENT.theme.titleDisplay}</span></span>
+          <button class="nav-drawer__close" id="menu-close">
+            <span class="visually-hidden">Close menu</span>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <ul class="nav-drawer__list">
+          ${navLinks}
+          <li><a class="is-livestream" href="${CONTENT.event.livestreamUrl}">▶ Livestream</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="livestream-pill" href="${CONTENT.event.livestreamUrl}">
+          <span class="livestream-pill__dot" aria-hidden="true"></span>
+          <span class="livestream-pill__label">Livestream</span>
+        </a>
+        <button class="menu-toggle" id="menu-open" aria-expanded="false" aria-controls="nav-drawer">
+          <span class="visually-hidden">Open menu</span>
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function renderFooter() {
+  const mount = document.getElementById("site-footer");
+  if (!mount) return;
+  mount.innerHTML = `
+    <div class="container">
+      <a class="wordmark" href="index.html">
+        <span class="wordmark__mark"></span>
+        <span class="wordmark__text">${CONTENT.theme.titleDisplay}</span>
+      </a>
+      <p class="footer-signoff">${CONTENT.footerSignOff}</p>
+      <div class="footer-grid">
+        <div>
+          <h4>The Evening</h4>
+          <p>${CONTENT.event.dateDisplay}<br>${CONTENT.event.venue.name}</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="program.html">Program</a></li>
+            <li><a href="artists.html">Artists</a></li>
+            <li><a href="guru.html">Guru</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="blessings.html">Leave a blessing</a></li>
+            <li><a href="contact.html">Contact & directions</a></li>
+            <li><a href="${CONTENT.event.livestreamUrl}">Watch the livestream</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">${CONTENT.theme.titleDisplay} — ${CONTENT.theme.subtitle}. A family website for ${CONTENT.performer.name}'s mridangam arangetram.</p>
+    </div>
+  `;
+}
+
+function renderEventStrip(mountId) {
+  const mount = document.getElementById(mountId || "event-strip");
+  if (!mount) return;
+  const guests = CONTENT.event.chiefGuests.join(" · ");
+  mount.innerHTML = `
+    <div class="container">
+      <div class="event-strip__row">
+        <span class="event-strip__label">Date</span>
+        <span class="event-strip__value">${CONTENT.event.dateDisplay}</span>
+      </div>
+      <div class="event-strip__row">
+        <span class="event-strip__label">Seating</span>
+        <span class="event-strip__value">${CONTENT.event.seatingTime}</span>
+      </div>
+      <div class="event-strip__row">
+        <span class="event-strip__label">Venue</span>
+        <span class="event-strip__value">${CONTENT.event.venue.name}, ${CONTENT.event.venue.addressLine2}</span>
+      </div>
+      <div class="event-strip__actions">
+        <a class="btn btn--on-dark" href="${CONTENT.event.venue.mapUrl}">Map ↗</a>
+        <a class="btn btn--live" href="${CONTENT.event.livestreamUrl}">▶ Livestream</a>
+      </div>
+    </div>
+  `;
+}
+
+function renderHero() {
+  const slidesMount = document.getElementById("hero-slides");
+  if (!slidesMount) return;
+  slidesMount.innerHTML = CONTENT.heroSlides
+    .map(
+      (slide, i) => `
+      <div class="hero__slide${i === 0 ? " is-active" : ""}" data-slide-index="${i}">
+        <div class="hero__text-col">
+          <h1 class="hero__headline">${slide.headline}</h1>
+        </div>
+        <img class="hero__portrait" src="${slide.image}" alt="${slide.alt}" width="480" height="640" ${i === 0 ? "" : 'loading="lazy"'}>
+        <p class="hero__subtitle">${slide.subtitle}</p>
+      </div>`
+    )
+    .join("");
+
+  const ringMount = document.getElementById("hero-tala-ring");
+  if (ringMount) ringMount.innerHTML = talaRingMarkup(0);
+}
+
+function renderArangetramTeaser() {
+  const mount = document.getElementById("arangetram-teaser");
+  if (!mount) return;
+  const t = CONTENT.arangetramTeaser;
+  mount.innerHTML = `
+    <p>${t.paragraph1}</p>
+    <p>${t.paragraph2}</p>
+    <a class="btn" href="about.html">${t.linkText} →</a>
+  `;
+}
+
+function renderEveningBlocks() {
+  const mount = document.getElementById("evening-blocks");
+  if (!mount) return;
+  const e = CONTENT.event;
+  mount.innerHTML = `
+    <div class="evening-block">
+      <h3>Date &amp; Seating</h3>
+      <p>${e.dateDisplay}<br>${e.seatingTime}</p>
+    </div>
+    <div class="evening-block">
+      <h3>Venue</h3>
+      <p>${e.venue.name}<br>${e.venue.addressLine1}<br>${e.venue.addressLine2}</p>
+      <a href="${e.venue.mapUrl}">Get directions ↗</a>
+    </div>
+    <div class="evening-block">
+      <h3>Chief Guests</h3>
+      <p>${e.chiefGuests.join("<br>")}</p>
+    </div>
+  `;
+}
+
+function renderParentsWelcome() {
+  const mount = document.getElementById("parents-welcome");
+  if (!mount) return;
+  const w = CONTENT.parentsWelcome;
+  mount.innerHTML = `
+    <img class="welcome__photo" src="${w.photo}" alt="${w.photoAlt}" width="600" height="450" loading="lazy">
+    <div>
+      ${w.paragraphs.map((p) => `<blockquote>${p}</blockquote>`).join("")}
+      <p class="welcome__signoff">${w.signOff}</p>
+    </div>
+  `;
+}
+
+function renderBlessingsPreview() {
+  const mount = document.getElementById("blessings-preview");
+  if (!mount) return;
+  const preview = CONTENT.blessings.slice(0, 3);
+  mount.innerHTML = preview
+    .map(
+      (b) => `
+      <li class="blessing-card">
+        <p>&ldquo;${b.message}&rdquo;</p>
+        <cite>${b.name}, ${b.relation}</cite>
+      </li>`
+    )
+    .join("");
+}
+
+function renderBlessingsFull() {
+  const mount = document.getElementById("blessings-full");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.blessings
+    .map(
+      (b) => `
+      <li class="blessing-card">
+        <p>&ldquo;${b.message}&rdquo;</p>
+        <cite>${b.name}, ${b.relation}</cite>
+      </li>`
+    )
+    .join("");
+}
+
+function renderProgramOrder() {
+  const mount = document.getElementById("program-order");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.programOrder
+    .map(
+      (step) => `
+      <li>
+        <span class="program-order__item">${step.item}</span>
+        ${step.note ? `<span class="program-order__note">${step.note}</span>` : ""}
+      </li>`
+    )
+    .join("");
+}
+
+function renderProgramPieces() {
+  const mount = document.getElementById("program-pieces");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.programPieces
+    .map(
+      (piece) => `
+      <li class="piece${piece.isThani ? " is-thani" : ""}">
+        ${piece.isThani ? '<span class="piece__thani-tag">Ani\'s Thani Avarthanam</span>' : ""}
+        <h3 class="piece__title">${piece.title}</h3>
+        <dl class="piece__meta">
+          <div><dt>Ragam</dt> <dd>${piece.ragam}</dd></div>
+          <div><dt>Thalam</dt> <dd>${piece.thalam}</dd></div>
+          <div><dt>Composer</dt> <dd>${piece.composer}</dd></div>
+        </dl>
+        <p class="piece__note">${piece.note}</p>
+        ${piece.lyricLine ? `<p class="piece__lyric">${piece.lyricLine}</p>` : ""}
+      </li>`
+    )
+    .join("");
+}
+
+function renderGratitude() {
+  const mount = document.getElementById("gratitude");
+  if (mount) mount.textContent = CONTENT.gratitude;
+}
+
+function renderAniStory() {
+  const mount = document.getElementById("ani-story");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.aniStory.paragraphs.map((p) => `<p>${p}</p>`).join("");
+}
+
+function renderArtists() {
+  const mount = document.getElementById("artist-cards");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.artists
+    .map(
+      (a) => `
+      <li class="person-card">
+        <img class="person-card__photo" src="${a.photo}" alt="${a.photoAlt}" width="200" height="200" loading="lazy">
+        <h3>${a.name}</h3>
+        <p class="person-card__instrument">${a.instrument} — ${a.role}</p>
+        <p>${a.bio}</p>
+      </li>`
+    )
+    .join("");
+}
+
+function renderGuru() {
+  const mount = document.getElementById("guru-content");
+  if (!mount) return;
+  const g = CONTENT.guru;
+  mount.innerHTML = `
+    <div class="guru-hero">
+      <img class="guru-hero__photo" src="${g.photo}" alt="${g.photoAlt}" width="500" height="600" loading="lazy">
+      <div>
+        <h2>${g.name}</h2>
+        <h3>Lineage</h3>
+        <p>${g.lineageParagraph}</p>
+        <h3>Teaching</h3>
+        <p>${g.teachingParagraph}</p>
+      </div>
+    </div>
+    <div class="guru-quote">
+      <h3>${g.wordsAboutStudentHeading}</h3>
+      <p>${g.wordsAboutStudent}</p>
+    </div>
+  `;
+}
+
+function renderChiefGuests() {
+  const mount = document.getElementById("chief-guest-cards");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.chiefGuestProfiles
+    .map(
+      (p) => `
+      <li class="person-card">
+        <img class="person-card__photo" src="${p.photo}" alt="${p.photoAlt}" width="200" height="200" loading="lazy">
+        <p class="person-card__instrument">${p.role}</p>
+        <h3>${p.name}</h3>
+        <p>${p.bio}</p>
+      </li>`
+    )
+    .join("");
+}
+
+function renderGallery() {
+  const mount = document.getElementById("gallery-grid");
+  if (!mount) return;
+  mount.innerHTML = CONTENT.gallery
+    .map(
+      (g, i) => `
+      <button type="button" data-gallery-index="${i}" aria-label="Open photo ${i + 1} of ${CONTENT.gallery.length}: ${g.alt}">
+        <img src="${g.image}" alt="${g.alt}" width="400" height="300" loading="lazy">
+      </button>`
+    )
+    .join("");
+}
+
+function renderContact() {
+  const mount = document.getElementById("contact-content");
+  if (!mount) return;
+  const c = CONTENT.contact;
+  mount.innerHTML = `
+    <div class="evening-block">
+      <h3>Directions</h3>
+      <p>${CONTENT.event.venue.name}<br>${CONTENT.event.venue.addressLine1}<br>${CONTENT.event.venue.addressLine2}</p>
+      <p>${c.directionsNote}</p>
+      <a class="btn" href="${CONTENT.event.venue.mapUrl}">Open in Maps ↗</a>
+    </div>
+    <div class="evening-block">
+      <h3>Parking</h3>
+      <p>${c.parkingNote}</p>
+    </div>
+    <div class="evening-block">
+      <h3>Accessibility</h3>
+      <p>${c.accessibilityNote}</p>
+    </div>
+    <p>Questions before the day? Email <a href="mailto:${c.email}">${c.email}</a>.</p>
+  `;
+}
+
+function renderAll() {
+  renderHeader();
+  renderFooter();
+  renderHero();
+  renderEventStrip();
+  renderArangetramTeaser();
+  renderEveningBlocks();
+  renderParentsWelcome();
+  renderBlessingsPreview();
+  renderBlessingsFull();
+  renderProgramOrder();
+  renderProgramPieces();
+  renderGratitude();
+  renderAniStory();
+  renderArtists();
+  renderGuru();
+  renderChiefGuests();
+  renderGallery();
+  renderContact();
+}
+
+document.addEventListener("DOMContentLoaded", renderAll);

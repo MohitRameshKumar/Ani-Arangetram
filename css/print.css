@@ -1,0 +1,41 @@
+/* print.css — used when a guest prints program.html for a paper program.
+   Loaded with media="print" on every page, but only program.html is tuned
+   for it; other pages fall back to sane browser print defaults. */
+
+@media print {
+  .site-header, .nav-drawer, .menu-toggle, .event-strip,
+  .hero__controls, .site-footer, .btn, .tala-divider,
+  #blessing-form, .skip-link {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  a { color: #000; text-decoration: none; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 9pt; }
+
+  .container { max-width: 100%; padding: 0; }
+
+  h1, h2, h3 { color: #000; page-break-after: avoid; }
+
+  .piece {
+    border: 1px solid #999;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 0.75rem;
+  }
+  .piece.is-thani { border: 2px solid #000; }
+  .piece__thani-tag {
+    background: none;
+    color: #000;
+    border: 1px solid #000;
+  }
+
+  .program-order li { break-inside: avoid; }
+
+  .card-grid, .gallery-grid { display: none; }
+}
