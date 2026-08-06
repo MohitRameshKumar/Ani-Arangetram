@@ -7,11 +7,7 @@
  * bio, or change the venue address here and it will show up correctly everywhere the
  * fact appears (nav bar, hero, program page, footer, etc). You do not need to know
  * HTML or CSS to edit this file — just replace the text inside the quotes ("...").
- * Keep the quotes and commas exactly where they are. Anything written as
- * [bracketed instructions like this] is a placeholder telling you what to put there —
- * delete the brackets and instructions once you fill it in. Text wrapped in
- * {{DOUBLE_BRACES}} marks a spot that lives directly in an .html file instead of here
- * (search the .html files for that exact token to find and replace it).
+ * Keep the quotes and commas exactly where they are.
  * If you break the file's punctuation by accident, ask whoever set this site up
  * for help, or compare against a backup copy before saving.
  */
@@ -27,32 +23,29 @@ const CONTENT = {
     titleDisplay: "LAYĀÑJALI",
     subtitle: "An Offering of Rhythm",
     glossLine: "laya (rhythmic flow) + añjali (an offering made with cupped hands)",
-    confirmNote: "{{CONFIRM_TITLE_WITH_GURU}} — the family should confirm this title's wording and connotation with Ani's guru before it is printed on invitations.",
+    confirmNote: "",
   },
 
   performer: {
     name: "Ani",
-    fullName: "[Ani's full name, as it should appear on formal materials]",
+    fullName: "Aniruth Kannan",
   },
 
   // ---------------------------------------------------------------------
   // EVENT DETAILS — fill these in as soon as they're locked.
   // ---------------------------------------------------------------------
   event: {
-    dateDisplay: "[Date to be finalized — e.g. \"Saturday, March 14, 2026\"]",
-    seatingTime: "[Seating time — e.g. \"5:30 PM, program begins 6:00 PM sharp\"]",
+    dateDisplay: "Saturday, August 22, 2026",
+    seatingTime: "Seating from 2:30 PM · Program begins at 3:00 PM",
     venue: {
-      name: "[Venue name — e.g. \"Sri Krishna Temple Auditorium\"]",
-      addressLine1: "[Street address]",
-      addressLine2: "[City, State, ZIP]",
-      mapUrl: "https://maps.google.com/?q={{VENUE_ADDRESS_URL_ENCODED}}",
+      name: "Mt. Pleasant High School",
+      addressLine1: "1750 South White Road",
+      addressLine2: "San Jose, CA 95127",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Mt.+Pleasant+High+School%2C+1750+South+White+Road%2C+San+Jose%2C+CA+95127",
     },
-    chiefGuests: [
-      "[Chief Guest name and one-line credential]",
-      "[Guest of Honor name and one-line credential]",
-    ],
-    livestreamUrl: "{{LIVESTREAM_URL}}",
-    livestreamNote: "[Livestream goes live 15 minutes before seating — link becomes active on the day.]",
+    chiefGuests: [],
+    livestreamUrl: "",
+    livestreamNote: "",
   },
 
   // ---------------------------------------------------------------------
@@ -63,25 +56,25 @@ const CONTENT = {
   heroSlides: [
     {
       image: "assets/images/ani-hero-cutout-1.png",
-      alt: "[Cutout photo of Ani seated at the mridangam, right hand mid-strike on the valanthalai — transparent background]",
+      alt: "Ani seated at the mridangam",
       headline: "Two hands, two skins, one cycle.",
       subtitle: "Tonight, Ani keeps the beat the whole room stands on.",
     },
     {
       image: "assets/images/ani-hero-cutout-2.png",
-      alt: "[Cutout photo of Ani, three-quarter view, hands raised just off the drumhead — transparent background]",
-      headline: "Nine years of counting under the breath.",
-      subtitle: "[Replace with the real number of years Ani has trained.]",
+      alt: "Ani poised to play the mridangam",
+      headline: "A journey that began at six.",
+      subtitle: "Years of listening, practice, and patient guidance lead to this stage.",
     },
     {
       image: "assets/images/ani-hero-cutout-3.png",
-      alt: "[Cutout photo of Ani with guru's hand resting on the mridangam's tension rings — transparent background]",
+      alt: "Ani with his guru and mridangam",
       headline: "Handed down, rope by rope, beat by beat.",
       subtitle: "A tradition passed from guru to student, one arangetram at a time.",
     },
     {
       image: "assets/images/ani-hero-cutout-4.png",
-      alt: "[Cutout photo of Ani looking directly at camera, seated, instrument in lap — transparent background]",
+      alt: "Ani seated with his mridangam",
       headline: "You're invited to sit close and listen hard.",
       subtitle: "This is the night the counting becomes a concert.",
     },
@@ -92,7 +85,7 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   arangetramTeaser: {
     paragraph1: "Arangetram means, plainly, \"ascending the stage\" — from the Tamil arangam (stage) and etram (ascent). It is the evening a guru formally presents a student to the public for the first time, after years spent learning in private. Traditionally it marks a beginning, not a graduation: the point at which a student is ready to offer the art on their own.",
-    paragraph2: "[Name the number of years] years ago, Ani sat down at a mridangam for the first time. Tonight is the first time Ani sits down at one in front of an audience that isn't a teacher, a parent, or a rehearsal hall.",
+    paragraph2: "Ani first sat down at a mridangam at age six. On August 22, he brings years of learning, listening, and performance to this milestone concert.",
     linkText: "Read more about the mridangam and the arangetram",
   },
 
@@ -102,13 +95,13 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   parentsWelcome: {
     photo: "assets/images/welcome-parents.jpg",
-    photoAlt: "[Family photo of Ani with both parents, informal, not posed for a program]",
+    photoAlt: "Ani with his family",
     paragraphs: [
-      "[Open with the specific moment you knew this was Ani's thing — an age, a piece of furniture drummed on, a song that stopped Ani cold. Not \"we always knew Ani had rhythm\" — the actual table, the actual song.]",
-      "[One paragraph about what the training actually looked like from your side of it — the early wake-ups for class, the recital that went sideways, the week before a big lesson. Specific and a little funny is better than reverent.]",
-      "[Close with what tonight means to you, in your own words. It's fine if it's short.]",
+      "Ani began learning the mridangam at age six as a way to stay engaged and connected to Indian culture. In time, those early lessons grew into a genuine love for Carnatic music.",
+      "We have watched him balance school, scouting, sports, and music while learning to listen closely, adapt in the moment, and find his own voice in rhythm.",
+      "This arangetram is a joyful milestone in Ani's journey. We are deeply grateful to his guru, the accompanying artists, and every friend and family member gathered to celebrate with him.",
     ],
-    signOff: "With so much love,\n[Parent Name] & [Parent Name]",
+    signOff: "With love and pride,\nAni's family",
   },
 
   // ---------------------------------------------------------------------
@@ -116,33 +109,7 @@ const CONTENT = {
   // full on blessings.html. Vary length and voice; these should read like
   // different people actually wrote them.
   // ---------------------------------------------------------------------
-  blessings: [
-    {
-      name: "Lakshmi Krishnan",
-      relation: "Ani's first mridangam teacher, ages 6–9",
-      message: "I still remember Ani showing up to the second lesson having already memorized the exercise I gave — most kids need three tries just to sit cross-legged that long. Go get 'em tonight.",
-    },
-    {
-      name: "The Ramaswamy Family",
-      relation: "neighbors",
-      message: "We have heard every single one of these talams through our shared wall for four years. We wouldn't trade it for anything. So proud of you, Ani!",
-    },
-    {
-      name: "Priya",
-      relation: "cousin",
-      message: "you're gonna do amazing tonight. also please let me hold the mridangam after, just once, i promise i'll be careful",
-    },
-    {
-      name: "Dr. and Mrs. Subramaniam",
-      relation: "family friends",
-      message: "From the first arangetram we attended in this community to Ani's tonight — watching this tradition continue, generation after generation, is a privilege. Warmest congratulations to Ani and the whole family.",
-    },
-    {
-      name: "[Guest Name]",
-      relation: "[relation to Ani]",
-      message: "[This is a placeholder — real wishes submitted through the guestbook form will replace entries like this one after a family member reviews and approves them. See README.md, \"Blessings form & moderation.\"]",
-    },
-  ],
+  blessings: [],
 
   // ---------------------------------------------------------------------
   // ABOUT PAGE — Ani's own training story. Keep it concrete: ages, names
@@ -150,9 +117,10 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   aniStory: {
     paragraphs: [
-      "[Age] is how old Ani was when [specific starting moment — a family member's mridangam left out after a gathering, a class a sibling was already taking, a video watched on repeat]. The first teacher was [name], who [one specific detail about the early lessons — what the first exercise was, how long lessons ran, where they happened].",
-      "[Describe the middle years of training — how practice fit around school, a memorable performance or setback, when Ani started learning under the current guru if that's a change from the first teacher].",
-      "[Close with where things stand now — how many years of training total, what a typical week of practice looks like leading up to tonight, and what Ani is most looking forward to playing.]",
+      "Ani began learning the mridangam at age six under the guidance of his guru, Gopi Lakshminarayanan. What started as a way to keep him engaged while staying connected to Indian culture soon grew into a true love for music.",
+      "With Carnatic music running through his family, Ani developed a natural appreciation for rhythm and melody. His guru recognized his excellent kala pramanam — his instinctive command of tempo — early on. As Ani progressed from playful lessons to accompanying singers on stage, he learned to listen carefully, adapt in the moment, and grow as a musician.",
+      "Some of his treasured experiences include seeing Sudha Ragunathan and Sanjay Subrahmanyan perform live, playing for the Epic Choir at the Cleveland Thyagaraja Festival, and participating in Silicon Andhra's Guinness World Record event for the largest ensemble of drummers.",
+      "While balancing school, scouting, sports, and music, Ani continues to flourish. On August 22, he looks forward to performing some of his favorite songs and celebrating an important milestone in his musical journey.",
     ],
   },
 
@@ -162,36 +130,36 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   artists: [
     {
-      name: "Ani",
+      name: "Chi. Aniruth Kannan",
       instrument: "Mridangam",
       role: "Performer",
       photo: "assets/images/artist-ani.jpg",
-      photoAlt: "[Formal portrait of Ani with the mridangam]",
-      bio: "[2–3 sentences: how long Ani has studied, under whom, and one specific thing about how Ani approaches the instrument.]",
+      photoAlt: "Portrait of Aniruth Kannan with the mridangam",
+      bio: "Ani began studying the mridangam at age six with Guru Gopi Lakshminarayanan. Known for his strong kala pramanam, he has grown from early lessons to accompanying vocalists on stage with attentive, responsive musicianship.",
     },
     {
-      name: "[Vocalist Name]",
+      name: "Vidwan Dr. Shivkumar Bhat",
       instrument: "Vocal",
       role: "Accompanying Artist",
       photo: "assets/images/artist-vocal.jpg",
-      photoAlt: "[Portrait of the vocal accompanist]",
-      bio: "[2–3 sentences on training and performing history.]",
+      photoAlt: "Portrait of vocalist Vidwan Dr. Shivkumar Bhat",
+      bio: "Vidwan Dr. Shivkumar Bhat leads the melodic voice of tonight's Carnatic concert, shaping the ragam and lyrical expression to which the ensemble responds.",
     },
     {
-      name: "[Violinist Name]",
+      name: "Vidwan V. V. Ravi",
       instrument: "Violin",
       role: "Accompanying Artist",
       photo: "assets/images/artist-violin.jpg",
-      photoAlt: "[Portrait of the violin accompanist]",
-      bio: "[2–3 sentences on training and performing history.]",
+      photoAlt: "Portrait of violinist Vidwan V. V. Ravi",
+      bio: "Vidwan V. V. Ravi joins on violin, echoing and extending the vocalist's melodic ideas through the improvisational conversation at the heart of Carnatic music.",
     },
     {
-      name: "[Ghatam Artist Name — optional, delete this entry if not performing]",
-      instrument: "Ghatam",
+      name: "Vidwan Ajay Gopi",
+      instrument: "Kanjira",
       role: "Accompanying Artist",
       photo: "assets/images/artist-ghatam.jpg",
-      photoAlt: "[Portrait of the ghatam accompanist]",
-      bio: "[2–3 sentences on training and performing history.]",
+      photoAlt: "Portrait of kanjira artist Vidwan Ajay Gopi",
+      bio: "Vidwan Ajay Gopi brings the kanjira's crisp, expressive voice to the percussion dialogue, complementing Ani's mridangam throughout the evening.",
     },
   ],
 
@@ -200,132 +168,164 @@ const CONTENT = {
   // card. Include the guru's own words about Ani if at all possible.
   // ---------------------------------------------------------------------
   guru: {
-    name: "[Guru's full name, with any honorific they use]",
+    name: "Gopi Lakshminarayanan",
     photo: "assets/images/guru.jpg",
-    photoAlt: "[Formal portrait of Ani's guru, ideally with a mridangam]",
-    lineageParagraph: "[Describe the guru's own training lineage — who they learned from, and theirs before that, as far back as it's known. This tradition is passed hand to hand, and naming that chain matters.]",
-    teachingParagraph: "[Describe how long the guru has taught, roughly how many students have had arangetrams under them, and what the guru is known for emphasizing in teaching.]",
-    wordsAboutStudentHeading: "In the guru's words",
-    wordsAboutStudent: "[Space for the guru to write directly about Ani, in their own words — how Ani started, what has changed over the years of training, what the guru wants the audience to listen for tonight. This should not be paraphrased by the family; ask the guru to write or dictate it directly.]",
+    photoAlt: "Portrait of Guru Gopi Lakshminarayanan",
+    lineageParagraph: "Sri Gopi Lakshminarayanan is a disciple of the late Sri Kumbakonam Narayanaswamy Iyer and continues his advanced learning with Sri Thanjavur Ramdoss, a disciple of Sri Palghat Mani Iyer. Through this lineage, the guru–shishya tradition carries Carnatic rhythm from one generation to the next through close listening, demonstration, correction, and trust.",
+    teachingParagraph: "Gopi leads the Sharadha School of Thala Vadhya in Fremont and has taught young percussionists in the Bay Area for more than a decade. From Ani's earliest playful lessons to his work accompanying singers on stage, he has helped Ani develop discipline, adaptability, and a strong sense of kala pramanam — the steady command of tempo that anchors an ensemble.",
+    wordsAboutStudentHeading: "A journey shaped by guidance",
+    wordsAboutStudent: "Tonight celebrates not only a performance, but years of patient learning between guru and student. Every phrase Ani plays carries that shared work forward.",
   },
 
   // ---------------------------------------------------------------------
   // CHIEF GUEST / GUEST OF HONOR PAGE
   // ---------------------------------------------------------------------
-  chiefGuestProfiles: [
-    {
-      role: "Chief Guest",
-      name: "[Chief Guest full name]",
-      photo: "assets/images/chief-guest-1.jpg",
-      photoAlt: "[Portrait of the Chief Guest]",
-      bio: "[2–4 sentences: who they are, their connection to Carnatic music or to Ani's family, and why they were invited to this role.]",
-    },
-    {
-      role: "Guest of Honor",
-      name: "[Guest of Honor full name]",
-      photo: "assets/images/chief-guest-2.jpg",
-      photoAlt: "[Portrait of the Guest of Honor]",
-      bio: "[2–4 sentences: who they are and their connection to Ani or the family.]",
-    },
-  ],
+  chiefGuestProfiles: [],
 
   // ---------------------------------------------------------------------
   // PROGRAM — order of the evening, then the song list. Add, remove, or
-  // reorder pieces freely; set isThani: true on exactly one piece (Ani's
-  // featured solo).
+  // reorder pieces freely.
   // ---------------------------------------------------------------------
   programOrder: [
-    { time: "", item: "Welcome & introductions", note: "Master of ceremonies opens the evening." },
-    { time: "", item: "Invocation", note: "An opening prayer to Ganesha, remover of obstacles." },
-    { time: "", item: "Artist introductions", note: "Ani and the accompanying musicians are introduced." },
-    { time: "", item: "Concert, part one", note: "" },
-    { time: "", item: "Chief guest's remarks", note: "" },
-    { time: "", item: "Guru's remarks", note: "" },
-    { time: "", item: "Concert, part two", note: "Includes Ani's thani avarthanam — the featured mridangam solo." },
-    { time: "", item: "A note of thanks", note: "From Ani and the family." },
-    { time: "", item: "Meet and greet", note: "" },
-    { time: "", item: "Dinner", note: "" },
+    { time: "2:30 PM", item: "Seating begins", note: "Doors open for guests." },
+    { time: "3:00 PM", item: "Welcome and introduction", note: "The program begins." },
+    { time: "", item: "Concert", note: "Twelve musical selections performed by Ani and the accompanying artists." },
+    { time: "", item: "Mangalam", note: "The evening closes with an auspicious benediction." },
   ],
 
   programPieces: [
     {
-      title: "[Invocation piece — e.g. \"Vatapi Ganapatim\"]",
-      ragam: "[Ragam]",
-      thalam: "Adi",
-      composer: "[Composer]",
-      note: "The concert traditionally opens with a prayer to Ganesha, the remover of obstacles, before anything else is offered.",
-      lyricLine: "[One translated line of lyrics, if available]",
+      title: "Reethigowla Ata Tala",
+      ragam: "Reethigowla",
+      thalam: "Ata Tala",
+      composer: "",
+      note: "An opening composition that establishes the concert's melodic and rhythmic foundation.",
+      lyricLine: "",
       isThani: false,
     },
     {
-      title: "[Piece 2 title]",
-      ragam: "[Ragam]",
-      thalam: "Rupakam",
-      composer: "[Composer]",
-      note: "[Plain-English note: what is this piece about, and what should a first-time listener listen for?]",
-      lyricLine: "[Optional translated lyric line]",
+      title: "Nin Pada Bhajanama",
+      ragam: "",
+      thalam: "",
+      composer: "",
+      note: "Listen for the ensemble's balance between melodic phrasing and responsive percussion.",
+      lyricLine: "",
       isThani: false,
     },
     {
-      title: "[Piece 3 title]",
-      ragam: "[Ragam]",
+      title: "Entani Vinavintura",
+      ragam: "Urmika",
+      thalam: "Adi Tala · Tisra Nadai",
+      composer: "Pallavi Sesha Iyer",
+      note: "A composition in the rare raga Urmika, carried by the threefold pulse of tisra nadai.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Chetasri Balakrishnam",
+      ragam: "Dwijavanti",
+      thalam: "Rupaka Tala",
+      composer: "Muthuswami Dikshitar",
+      note: "A lyrical composition in Dwijavanti, a raga known for its reflective, expressive character.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Thaniga Valar",
+      ragam: "Todi",
+      thalam: "",
+      composer: "Papanasam Sivan",
+      note: "A devotional composition set in the expansive raga Todi.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Shobhillu Saptaswara",
+      ragam: "Jaganmohini",
+      thalam: "Rupaka Tala",
+      composer: "Saint Tyagaraja",
+      note: "A celebration of the radiance of the seven musical notes.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Ragam Tanam Pallavi",
+      ragam: "To be announced on stage",
+      thalam: "To be announced on stage",
+      composer: "Improvised",
+      note: "The concert's improvisational centerpiece unfolds through raga exploration, rhythmic tanam, and the composed pallavi line. The percussion dialogue comes fully to the foreground here.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Asainthadum Mayil",
+      ragam: "Simhendramadhyamam",
+      thalam: "Adi Tala",
+      composer: "Oothukkadu Venkata Kavi",
+      note: "A vivid Tamil composition portraying Krishna through the image of a gracefully dancing peacock.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Thillana in Kapi",
+      ragam: "Kapi",
+      thalam: "",
+      composer: "",
+      note: "A lively, rhythm-forward thillana brings the concert toward its concluding sequence.",
+      lyricLine: "",
+      isThani: false,
+    },
+    {
+      title: "Vangakkadal",
+      ragam: "Surati",
       thalam: "Misra Chapu",
-      composer: "[Composer]",
-      note: "[Plain-English note on the piece.]",
+      composer: "Andal · Tiruppavai",
+      note: "The concluding verse of Andal's Tiruppavai, set here to the lilting seven-beat Misra Chapu cycle.",
       lyricLine: "",
       isThani: false,
     },
     {
-      title: "Thani Avarthanam",
-      ragam: "—",
-      thalam: "Adi",
-      composer: "Traditional",
-      note: "Ani's featured solo — the moment the mridangam steps forward on its own, without the melody, to develop and resolve a rhythmic idea across the full 8-beat cycle.",
-      lyricLine: "",
-      isThani: true,
-    },
-    {
-      title: "[Piece 5 title — e.g. a Ragam Tanam Pallavi]",
-      ragam: "[Ragam]",
-      thalam: "Khanda Chapu",
-      composer: "[Composer, or \"Traditional / improvised\"]",
-      note: "[If this is a Ragam Tanam Pallavi, note that it's the most technically demanding item on the program, largely improvised in three movements.]",
+      title: "Karpagame",
+      ragam: "Madhyamavati",
+      thalam: "Adi Tala",
+      composer: "Papanasam Sivan",
+      note: "A prayer to Goddess Karpagambal in the auspicious raga Madhyamavati.",
       lyricLine: "",
       isThani: false,
     },
     {
-      title: "Pavamana",
-      ragam: "[Ragam]",
-      thalam: "[Thalam]",
+      title: "Mangalam",
+      ragam: "",
+      thalam: "",
       composer: "Traditional",
-      note: "The concert traditionally closes with this benediction.",
+      note: "An auspicious benediction closes the concert.",
       lyricLine: "",
       isThani: false,
     },
   ],
 
-  gratitude: "[Space for a closing acknowledgements paragraph — thanking the guru, accompanying artists, venue staff, family members who helped organize, and anyone who traveled to attend.]",
+  gratitude: "With heartfelt thanks to Guru Gopi Lakshminarayanan; Vidwan Dr. Shivkumar Bhat, Vidwan V. V. Ravi, and Vidwan Ajay Gopi; and to the family, friends, teachers, and community members whose encouragement made this milestone possible.",
 
   // ---------------------------------------------------------------------
   // GALLERY — training and rehearsal photos. Add or remove freely.
   // ---------------------------------------------------------------------
   gallery: [
-    { image: "assets/images/gallery-1.jpg", alt: "[Rehearsal photo — describe what's happening]" },
-    { image: "assets/images/gallery-2.jpg", alt: "[Rehearsal photo — describe what's happening]" },
-    { image: "assets/images/gallery-3.jpg", alt: "[Rehearsal photo — describe what's happening]" },
-    { image: "assets/images/gallery-4.jpg", alt: "[Rehearsal photo — describe what's happening]" },
-    { image: "assets/images/gallery-5.jpg", alt: "[Rehearsal photo — describe what's happening]" },
-    { image: "assets/images/gallery-6.jpg", alt: "[Rehearsal photo — describe what's happening]" },
+    { image: "assets/images/gallery-1.jpg", alt: "A moment from Ani's musical journey" },
+    { image: "assets/images/gallery-2.jpg", alt: "Ani during mridangam practice" },
+    { image: "assets/images/gallery-3.jpg", alt: "A lesson and rehearsal memory" },
+    { image: "assets/images/gallery-4.jpg", alt: "Ani performing with fellow musicians" },
+    { image: "assets/images/gallery-5.jpg", alt: "A milestone from Ani's Carnatic music journey" },
+    { image: "assets/images/gallery-6.jpg", alt: "Ani preparing for his arangetram" },
   ],
 
   // ---------------------------------------------------------------------
   // CONTACT PAGE
   // ---------------------------------------------------------------------
   contact: {
-    email: "[family-contact@email.com]",
-    parkingNote: "[Describe parking — lot location, street parking rules, overflow options.]",
-    accessibilityNote: "[Describe accessibility: step-free entrance, accessible restrooms, reserved seating, hearing assistance if available.]",
-    directionsNote: "[Any notes on the drive/transit that a map link won't cover — which entrance to use, nearby landmarks.]",
+    email: "",
+    parkingNote: "Please follow event signage and venue staff directions on arrival. Allow a few extra minutes for parking before seating begins at 2:30 PM.",
+    accessibilityNote: "For specific accessibility arrangements, please contact the event hosts directly before the program.",
+    directionsNote: "Use the South White Road address below. The program begins at 3:00 PM.",
   },
 
   // ---------------------------------------------------------------------

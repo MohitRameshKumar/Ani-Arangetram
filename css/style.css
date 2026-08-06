@@ -715,6 +715,13 @@ a:hover { color: var(--kumkum); }
   border-bottom: 1px dashed var(--chalk-dim);
 }
 .program-order__item { font-family: var(--font-display); font-size: 1.1rem; }
+.program-order__time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--kumkum);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 .program-order__note { font-size: 0.9rem; color: var(--jackfruit-ink); }
 
 .piece {

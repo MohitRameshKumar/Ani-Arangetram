@@ -13,8 +13,6 @@ const NAV_ITEMS = [
   { href: "artists.html", label: "Artists", page: "artists" },
   { href: "guru.html", label: "Guru", page: "guru" },
   { href: "gallery.html", label: "Gallery", page: "gallery" },
-  { href: "chief-guest.html", label: "Chief Guest", page: "chief-guest" },
-  { href: "blessings.html", label: "Blessings", page: "blessings" },
   { href: "contact.html", label: "Contact", page: "contact" },
 ];
 
@@ -42,6 +40,9 @@ function renderHeader() {
     (item) =>
       `<li><a href="${item.href}"${item.page === page ? ' aria-current="page"' : ""}>${item.label}</a></li>`
   ).join("");
+  const livestreamNav = CONTENT.event.livestreamUrl
+    ? `<li><a class="is-livestream" href="${CONTENT.event.livestreamUrl}">▶ Livestream</a></li>`
+    : "";
   mount.innerHTML = `
     <div class="container header-grid">
       <a class="wordmark" href="index.html">
@@ -58,14 +59,14 @@ function renderHeader() {
         </div>
         <ul class="nav-drawer__list">
           ${navLinks}
-          <li><a class="is-livestream" href="${CONTENT.event.livestreamUrl}">▶ Livestream</a></li>
+          ${livestreamNav}
         </ul>
       </nav>
       <div class="header-actions">
-        <a class="livestream-pill" href="${CONTENT.event.livestreamUrl}">
+        ${CONTENT.event.livestreamUrl ? `<a class="livestream-pill" href="${CONTENT.event.livestreamUrl}">
           <span class="livestream-pill__dot" aria-hidden="true"></span>
           <span class="livestream-pill__label">Livestream</span>
-        </a>
+        </a>` : ""}
         <button class="menu-toggle" id="menu-open" aria-expanded="false" aria-controls="nav-drawer">
           <span class="visually-hidden">Open menu</span>
           <span class="menu-toggle__bars" aria-hidden="true"></span>
@@ -102,9 +103,8 @@ function renderFooter() {
         <div>
           <h4>Connect</h4>
           <ul>
-            <li><a href="blessings.html">Leave a blessing</a></li>
             <li><a href="contact.html">Contact & directions</a></li>
-            <li><a href="${CONTENT.event.livestreamUrl}">Watch the livestream</a></li>
+            ${CONTENT.event.livestreamUrl ? `<li><a href="${CONTENT.event.livestreamUrl}">Watch the livestream</a></li>` : ""}
           </ul>
         </div>
       </div>
@@ -116,7 +116,6 @@ function renderFooter() {
 function renderEventStrip(mountId) {
   const mount = document.getElementById(mountId || "event-strip");
   if (!mount) return;
-  const guests = CONTENT.event.chiefGuests.join(" · ");
   mount.innerHTML = `
     <div class="container">
       <div class="event-strip__row">
@@ -133,7 +132,7 @@ function renderEventStrip(mountId) {
       </div>
       <div class="event-strip__actions">
         <a class="btn btn--on-dark" href="${CONTENT.event.venue.mapUrl}">Map ↗</a>
-        <a class="btn btn--live" href="${CONTENT.event.livestreamUrl}">▶ Livestream</a>
+        ${CONTENT.event.livestreamUrl ? `<a class="btn btn--live" href="${CONTENT.event.livestreamUrl}">▶ Livestream</a>` : ""}
       </div>
     </div>
   `;
@@ -184,10 +183,10 @@ function renderEveningBlocks() {
       <p>${e.venue.name}<br>${e.venue.addressLine1}<br>${e.venue.addressLine2}</p>
       <a href="${e.venue.mapUrl}">Get directions ↗</a>
     </div>
-    <div class="evening-block">
+    ${e.chiefGuests.length ? `<div class="evening-block">
       <h3>Chief Guests</h3>
       <p>${e.chiefGuests.join("<br>")}</p>
-    </div>
+    </div>` : ""}
   `;
 }
 
@@ -208,6 +207,11 @@ function renderBlessingsPreview() {
   const mount = document.getElementById("blessings-preview");
   if (!mount) return;
   const preview = CONTENT.blessings.slice(0, 3);
+  if (!preview.length) {
+    const section = mount.closest("section");
+    if (section) section.hidden = true;
+    return;
+  }
   mount.innerHTML = preview
     .map(
       (b) => `
@@ -222,6 +226,10 @@ function renderBlessingsPreview() {
 function renderBlessingsFull() {
   const mount = document.getElementById("blessings-full");
   if (!mount) return;
+  if (!CONTENT.blessings.length) {
+    mount.innerHTML = '<li class="card"><p>Wishes from friends and family will be added here as the celebration approaches.</p></li>';
+    return;
+  }
   mount.innerHTML = CONTENT.blessings
     .map(
       (b) => `
@@ -240,6 +248,7 @@ function renderProgramOrder() {
     .map(
       (step) => `
       <li>
+        ${step.time ? `<span class="program-order__time">${step.time}</span>` : ""}
         <span class="program-order__item">${step.item}</span>
         ${step.note ? `<span class="program-order__note">${step.note}</span>` : ""}
       </li>`
@@ -256,11 +265,11 @@ function renderProgramPieces() {
       <li class="piece${piece.isThani ? " is-thani" : ""}">
         ${piece.isThani ? '<span class="piece__thani-tag">Ani\'s Thani Avarthanam</span>' : ""}
         <h3 class="piece__title">${piece.title}</h3>
-        <dl class="piece__meta">
-          <div><dt>Ragam</dt> <dd>${piece.ragam}</dd></div>
-          <div><dt>Thalam</dt> <dd>${piece.thalam}</dd></div>
-          <div><dt>Composer</dt> <dd>${piece.composer}</dd></div>
-        </dl>
+        ${piece.ragam || piece.thalam || piece.composer ? `<dl class="piece__meta">
+          ${piece.ragam ? `<div><dt>Ragam</dt> <dd>${piece.ragam}</dd></div>` : ""}
+          ${piece.thalam ? `<div><dt>Thalam</dt> <dd>${piece.thalam}</dd></div>` : ""}
+          ${piece.composer ? `<div><dt>Composer</dt> <dd>${piece.composer}</dd></div>` : ""}
+        </dl>` : ""}
         <p class="piece__note">${piece.note}</p>
         ${piece.lyricLine ? `<p class="piece__lyric">${piece.lyricLine}</p>` : ""}
       </li>`
@@ -320,6 +329,10 @@ function renderGuru() {
 function renderChiefGuests() {
   const mount = document.getElementById("chief-guest-cards");
   if (!mount) return;
+  if (!CONTENT.chiefGuestProfiles.length) {
+    mount.innerHTML = '<li class="card"><p>No chief guest profiles have been announced for this program.</p></li>';
+    return;
+  }
   mount.innerHTML = CONTENT.chiefGuestProfiles
     .map(
       (p) => `
@@ -365,7 +378,7 @@ function renderContact() {
       <h3>Accessibility</h3>
       <p>${c.accessibilityNote}</p>
     </div>
-    <p>Questions before the day? Email <a href="mailto:${c.email}">${c.email}</a>.</p>
+    ${c.email ? `<p>Questions before the day? Email <a href="mailto:${c.email}">${c.email}</a>.</p>` : ""}
   `;
 }
 

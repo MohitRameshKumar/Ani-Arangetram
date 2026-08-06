@@ -20,26 +20,7 @@
     <section class="section container">
       <span class="eyebrow">Guestbook</span>
       <h1>Leave a blessing for Ani</h1>
-      <p>A note, a memory, a good wish for tonight — anything you'd want Ani to read later. A family member reviews each note before it's added to this page, so don't worry if yours doesn't appear right away.</p>
-
-      <p id="form-success-message" class="form-note" style="display:none; color: var(--jackfruit-ink); font-weight: 600;">Thank you — your blessing was sent. It will appear on this page once a family member has had a chance to review it.</p>
-
-      <form id="blessing-form" action="{{FORMSPREE_ENDPOINT}}" method="POST">
-        <div class="form-field">
-          <label for="bf-name">Your name</label>
-          <input type="text" id="bf-name" name="name" required autocomplete="name">
-        </div>
-        <div class="form-field">
-          <label for="bf-relation">Your connection to Ani (optional)</label>
-          <input type="text" id="bf-relation" name="relation" placeholder="e.g. cousin, family friend, fellow student" autocomplete="off">
-        </div>
-        <div class="form-field">
-          <label for="bf-message">Your blessing</label>
-          <textarea id="bf-message" name="message" rows="4" required></textarea>
-        </div>
-        <button class="btn btn--solid" type="submit">Send blessing</button>
-        <p class="form-note">{{FORMSPREE_ENDPOINT}} — this form needs a real Formspree (or similar) endpoint before it will deliver submissions. See README.md, "Blessings form &amp; moderation."</p>
-      </form>
+      <p>A note, a memory, a good wish for tonight — anything you'd want Ani to read later. Online submissions are not open yet; the family will share details when the guestbook is ready.</p>
     </section>
 
     <div class="tala-divider" aria-hidden="true"><span class="tala-divider__arc"></span></div>
@@ -55,16 +36,5 @@
   <script src="js/content.js"></script>
   <script src="js/render.js"></script>
   <script src="js/main.js"></script>
-  <script>
-    document.getElementById("blessing-form").addEventListener("submit", function (e) {
-      var params = new URLSearchParams(window.location.search);
-      if (params.get("submitted") === "true") {
-        document.getElementById("form-success-message").style.display = "block";
-      }
-    });
-    if (new URLSearchParams(window.location.search).get("submitted") === "true") {
-      document.getElementById("form-success-message").style.display = "block";
-    }
-  </script>
 </body>
 </html>
