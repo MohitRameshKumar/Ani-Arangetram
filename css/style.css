@@ -481,13 +481,13 @@ a:hover { color: var(--kumkum); }
   position: relative;
   display: flex;
   justify-content: center;
-  min-height: 24rem;
+  height: clamp(36rem, 92vw, 44rem);
 }
 .hero__slides {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 24rem;
+  height: 100%;
 }
 .hero__slide {
   position: absolute;
@@ -501,7 +501,7 @@ a:hover { color: var(--kumkum); }
   visibility: hidden;
   transition: opacity 0.6s ease;
 }
-.hero__slide.is-active { opacity: 1; visibility: visible; position: relative; }
+.hero__slide.is-active { opacity: 1; visibility: visible; }
 .hero__text-col {
   position: relative;
   z-index: 2;
@@ -517,6 +517,36 @@ a:hover { color: var(--kumkum); }
   aspect-ratio: 3 / 4;
   object-fit: contain;
   object-position: bottom;
+}
+.hero__portrait.hero__portrait--wide {
+  width: min(92vw, 760px);
+  max-height: 26rem;
+  aspect-ratio: 16 / 9;
+}
+.hero__slide[data-slide-index="0"] .hero__portrait {
+  width: min(92vw, 760px);
+  max-height: 26rem;
+  aspect-ratio: 1406 / 1119;
+}
+.hero__slide[data-slide-index="1"] .hero__portrait {
+  width: min(98vw, 900px);
+  max-height: 30rem;
+  aspect-ratio: 1630 / 965;
+  margin-top: -4.5rem;
+}
+.hero__slide[data-slide-index="2"] .hero__portrait {
+  aspect-ratio: 1672 / 941;
+}
+.hero__slide[data-slide-index="3"] .hero__portrait {
+  aspect-ratio: 1672 / 941;
+}
+.hero__slide[data-slide-index="2"] .hero__text-col,
+.hero__slide[data-slide-index="3"] .hero__text-col {
+  max-width: min(94vw, 46rem);
+}
+.hero__slide[data-slide-index="2"] .hero__headline,
+.hero__slide[data-slide-index="3"] .hero__headline {
+  font-size: var(--step-hero);
 }
 .hero__headline {
   font-size: var(--step-hero);
@@ -587,7 +617,7 @@ a:hover { color: var(--kumkum); }
 }
 
 @media (min-width: 60rem) {
-  .hero__stage, .hero__slides { min-height: 30rem; }
+  .hero__stage { height: 50rem; }
   .hero__portrait { width: min(30vw, 320px); }
   .hero__text-col { max-width: 34rem; margin-bottom: -2.5rem; }
   .event-strip .container { grid-template-columns: repeat(3, 1fr) auto; align-items: center; }
@@ -608,6 +638,23 @@ a:hover { color: var(--kumkum); }
   display: block;
   margin-bottom: 0.5rem;
 }
+
+.about-banner {
+  position: relative;
+  background-color: var(--syahi);
+  background-image:
+    linear-gradient(180deg, rgba(20, 16, 12, 0.35) 0%, rgba(20, 16, 12, 0.82) 85%),
+    url("../images/newtemple.avif");
+  background-repeat: no-repeat;
+  background-position: center 35%;
+  background-size: cover;
+  color: var(--chalk);
+  text-align: center;
+  padding-block: 5.5rem 3.5rem;
+}
+.about-banner__content { position: relative; z-index: 1; }
+.about-banner h1 { color: var(--chalk); margin-bottom: 0; }
+.eyebrow--on-dark { color: var(--brass); }
 
 .evening-blocks {
   position: relative;
@@ -677,7 +724,15 @@ a:hover { color: var(--kumkum); }
   gap: 2rem;
   align-items: start;
 }
-.welcome__photo { border-radius: var(--radius); border: 1px solid var(--chalk-dim); }
+.welcome__photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--chalk-dim);
+}
 .welcome blockquote {
   margin: 0;
   font-family: var(--font-display);
@@ -766,12 +821,25 @@ a:hover { color: var(--kumkum); }
   padding: 1.5rem;
   text-align: center;
 }
-.person-card__photo {
-  width: 9rem; height: 9rem;
+.person-card__photo-frame {
+  width: min(14rem, 72vw);
+  aspect-ratio: 1;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
   margin: 0 auto 1rem;
   border: 3px solid var(--chalk-dim);
+  background: var(--syahi);
+}
+.person-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.person-card[data-artist-index="0"] .person-card__photo {
+  transform: scale(1.05);
+  transform-origin: center 42%;
+  object-position: center 42%;
 }
 .person-card__instrument {
   font-family: var(--font-mono);
@@ -786,8 +854,14 @@ a:hover { color: var(--kumkum); }
   display: grid;
   gap: 2rem;
 }
-.guru-hero__photo { border-radius: var(--radius); border: 1px solid var(--chalk-dim); }
-@media (min-width: 55rem) { .guru-hero { grid-template-columns: 0.7fr 1.3fr; align-items: start; } }
+.guru-hero__photo {
+  width: 100%;
+  height: auto;
+  max-width: 26rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--chalk-dim);
+}
+@media (min-width: 55rem) { .guru-hero { grid-template-columns: 0.8fr 1.2fr; align-items: start; } }
 .guru-quote {
   background: var(--syahi);
   color: var(--chalk);
@@ -817,7 +891,7 @@ a:hover { color: var(--kumkum); }
   z-index: 300; padding: 1.5rem;
 }
 .lightbox.is-open { display: flex; }
-.lightbox img { max-height: 80vh; max-width: 100%; border-radius: var(--radius); }
+.lightbox img { width: auto; height: auto; max-height: 80vh; max-width: 100%; object-fit: contain; border-radius: var(--radius); }
 .lightbox__caption { color: var(--chalk); text-align: center; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.85rem; }
 .lightbox__close, .lightbox__prev, .lightbox__next {
   position: absolute;

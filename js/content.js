@@ -55,26 +55,38 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   heroSlides: [
     {
-      image: "assets/images/ani-hero-cutout-1.png",
+      image: "assets/images/ani-hero-cutout-1-wide.png",
       alt: "Ani seated at the mridangam",
+      wide: true,
+      width: 1406,
+      height: 1119,
       headline: "Two hands, two skins, one cycle.",
       subtitle: "Tonight, Ani keeps the beat the whole room stands on.",
     },
     {
       image: "assets/images/ani-hero-cutout-2.png",
-      alt: "Ani poised to play the mridangam",
+      alt: "Ani performing on stage",
+      wide: true,
+      width: 1630,
+      height: 965,
       headline: "A journey that began at six.",
       subtitle: "Years of listening, practice, and patient guidance lead to this stage.",
     },
     {
       image: "assets/images/ani-hero-cutout-3.png",
       alt: "Ani with his guru and mridangam",
+      wide: true,
+      width: 1672,
+      height: 941,
       headline: "Handed down, rope by rope, beat by beat.",
       subtitle: "A tradition passed from guru to student, one arangetram at a time.",
     },
     {
       image: "assets/images/ani-hero-cutout-4.png",
-      alt: "Ani seated with his mridangam",
+      alt: "Ani with his mentor",
+      wide: true,
+      width: 1672,
+      height: 941,
       headline: "You're invited to sit close and listen hard.",
       subtitle: "This is the night the counting becomes a concert.",
     },
@@ -94,7 +106,7 @@ const CONTENT = {
   // Write this in two voices, not brochure copy. Name a specific memory.
   // ---------------------------------------------------------------------
   parentsWelcome: {
-    photo: "assets/images/welcome-parents.jpg",
+    photo: "images/Ani family pic.png",
     photoAlt: "Ani with his family",
     paragraphs: [
       "Ani began learning the mridangam at age six as a way to stay engaged and connected to Indian culture. In time, those early lessons grew into a genuine love for Carnatic music.",
@@ -133,7 +145,7 @@ const CONTENT = {
       name: "Chi. Aniruth Kannan",
       instrument: "Mridangam",
       role: "Performer",
-      photo: "assets/images/artist-ani.jpg",
+      photo: "images/ani-artist-portrait-sharp.jpg",
       photoAlt: "Portrait of Aniruth Kannan with the mridangam",
       bio: "Ani began studying the mridangam at age six with Guru Gopi Lakshminarayanan. Known for his strong kala pramanam, he has grown from early lessons to accompanying vocalists on stage with attentive, responsive musicianship.",
     },
@@ -141,7 +153,7 @@ const CONTENT = {
       name: "Vidwan Dr. Shivkumar Bhat",
       instrument: "Vocal",
       role: "Accompanying Artist",
-      photo: "assets/images/artist-vocal.jpg",
+      photo: "images/sivakumar sir.jpeg",
       photoAlt: "Portrait of vocalist Vidwan Dr. Shivkumar Bhat",
       bio: "Vidwan Dr. Shivkumar Bhat leads the melodic voice of tonight's Carnatic concert, shaping the ragam and lyrical expression to which the ensemble responds.",
     },
@@ -149,7 +161,7 @@ const CONTENT = {
       name: "Vidwan V. V. Ravi",
       instrument: "Violin",
       role: "Accompanying Artist",
-      photo: "assets/images/artist-violin.jpg",
+      photo: "images/V.V. Ravi.jpg",
       photoAlt: "Portrait of violinist Vidwan V. V. Ravi",
       bio: "Vidwan V. V. Ravi joins on violin, echoing and extending the vocalist's melodic ideas through the improvisational conversation at the heart of Carnatic music.",
     },
@@ -157,7 +169,7 @@ const CONTENT = {
       name: "Vidwan Ajay Gopi",
       instrument: "Kanjira",
       role: "Accompanying Artist",
-      photo: "assets/images/artist-ghatam.jpg",
+      photo: "images/ajay-gopi-portrait.jpg",
       photoAlt: "Portrait of kanjira artist Vidwan Ajay Gopi",
       bio: "Vidwan Ajay Gopi brings the kanjira's crisp, expressive voice to the percussion dialogue, complementing Ani's mridangam throughout the evening.",
     },
@@ -169,8 +181,8 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   guru: {
     name: "Gopi Lakshminarayanan",
-    photo: "assets/images/guru.jpg",
-    photoAlt: "Portrait of Guru Gopi Lakshminarayanan",
+    photo: "images/guru-ani-portrait.jpg",
+    photoAlt: "Guru Gopi Lakshminarayanan with Ani and a fellow student",
     lineageParagraph: "Sri Gopi Lakshminarayanan is a disciple of the late Sri Kumbakonam Narayanaswamy Iyer and continues his advanced learning with Sri Thanjavur Ramdoss, a disciple of Sri Palghat Mani Iyer. Through this lineage, the guru–shishya tradition carries Carnatic rhythm from one generation to the next through close listening, demonstration, correction, and trust.",
     teachingParagraph: "Gopi leads the Sharadha School of Thala Vadhya in Fremont and has taught young percussionists in the Bay Area for more than a decade. From Ani's earliest playful lessons to his work accompanying singers on stage, he has helped Ani develop discipline, adaptability, and a strong sense of kala pramanam — the steady command of tempo that anchors an ensemble.",
     wordsAboutStudentHeading: "A journey shaped by guidance",
@@ -310,12 +322,9 @@ const CONTENT = {
   // GALLERY — training and rehearsal photos. Add or remove freely.
   // ---------------------------------------------------------------------
   gallery: [
-    { image: "assets/images/gallery-1.jpg", alt: "A moment from Ani's musical journey" },
-    { image: "assets/images/gallery-2.jpg", alt: "Ani during mridangam practice" },
-    { image: "assets/images/gallery-3.jpg", alt: "A lesson and rehearsal memory" },
-    { image: "assets/images/gallery-4.jpg", alt: "Ani performing with fellow musicians" },
-    { image: "assets/images/gallery-5.jpg", alt: "A milestone from Ani's Carnatic music journey" },
-    { image: "assets/images/gallery-6.jpg", alt: "Ani preparing for his arangetram" },
+    { image: "images/ani with mentor.jpg", alt: "Ani with his mentor" },
+    { image: "images/gallery-practice.jpg", alt: "Ani practicing mridangam alongside his teachers" },
+    { image: "images/gallery-performance.jpg", alt: "Ani performing on stage with fellow musicians" },
   ],
 
   // ---------------------------------------------------------------------

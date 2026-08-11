@@ -148,7 +148,7 @@ function renderHero() {
         <div class="hero__text-col">
           <h1 class="hero__headline">${slide.headline}</h1>
         </div>
-        <img class="hero__portrait" src="${slide.image}" alt="${slide.alt}" width="480" height="640" ${i === 0 ? "" : 'loading="lazy"'}>
+        <img class="hero__portrait${slide.wide ? " hero__portrait--wide" : ""}" src="${slide.image}" alt="${slide.alt}" width="${slide.width || (slide.wide ? 1672 : 480)}" height="${slide.height || (slide.wide ? 941 : 640)}" ${i === 0 ? "" : 'loading="lazy"'}>
         <p class="hero__subtitle">${slide.subtitle}</p>
       </div>`
     )
@@ -293,9 +293,11 @@ function renderArtists() {
   if (!mount) return;
   mount.innerHTML = CONTENT.artists
     .map(
-      (a) => `
-      <li class="person-card">
-        <img class="person-card__photo" src="${a.photo}" alt="${a.photoAlt}" width="200" height="200" loading="lazy">
+      (a, i) => `
+      <li class="person-card" data-artist-index="${i}">
+        <div class="person-card__photo-frame">
+          <img class="person-card__photo" src="${a.photo}" alt="${a.photoAlt}" width="640" height="640" loading="lazy">
+        </div>
         <h3>${a.name}</h3>
         <p class="person-card__instrument">${a.instrument} — ${a.role}</p>
         <p>${a.bio}</p>
@@ -310,7 +312,7 @@ function renderGuru() {
   const g = CONTENT.guru;
   mount.innerHTML = `
     <div class="guru-hero">
-      <img class="guru-hero__photo" src="${g.photo}" alt="${g.photoAlt}" width="500" height="600" loading="lazy">
+      <img class="guru-hero__photo" src="${g.photo}" alt="${g.photoAlt}" width="1200" height="1662" loading="lazy">
       <div>
         <h2>${g.name}</h2>
         <h3>Lineage</h3>
