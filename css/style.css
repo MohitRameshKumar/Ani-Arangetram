@@ -270,7 +270,6 @@ a:hover { color: var(--kumkum); }
 }
 .header-grid > * { min-width: 0; }
 .header-grid .wordmark { grid-column: 1; justify-self: start; }
-.header-grid .nav-drawer { grid-column: 2; justify-self: center; }
 .header-grid .header-actions { grid-column: 3; justify-self: end; }
 
 .header-actions {
@@ -337,49 +336,48 @@ a:hover { color: var(--kumkum); }
 .menu-toggle__bars::before { position: absolute; top: -6px; }
 .menu-toggle__bars::after { position: absolute; top: 6px; }
 
+/* Mobile nav is a dropdown anchored under the hamburger toggle, not a
+   full-screen panel — .site-header is `position: sticky` (a positioned
+   ancestor), so this `position: absolute` is relative to the header bar. */
 .nav-drawer {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  margin-top: 0.6rem;
+  width: min(15rem, calc(100vw - 2rem));
+  max-height: min(70vh, 26rem);
   background: var(--syahi);
   color: var(--chalk);
-  z-index: 150;
-  transform: translateX(100%);
-  transition: transform 0.35s ease;
-  overflow-y: auto;
-}
-.nav-drawer.is-open { transform: translateX(0); }
-.nav-drawer__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.1rem 1.25rem;
-  border-bottom: 1px solid rgba(242,235,221,0.15);
-}
-.nav-drawer__top .wordmark, .nav-drawer__top .wordmark:hover { color: var(--chalk); }
-.nav-drawer__close {
-  background: none;
-  border: 2px solid var(--chalk);
-  color: var(--chalk);
-  width: 2.75rem;
-  height: 2.75rem;
   border-radius: var(--radius);
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
+  box-shadow: 0 1rem 2rem -0.5rem rgba(20, 16, 12, 0.5);
+  z-index: 150;
+  overflow-y: auto;
+  transform-origin: top right;
+  transform: scale(0.96) translateY(-0.35rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+}
+.nav-drawer.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
 }
 .nav-drawer__list {
   list-style: none;
   margin: 0;
-  padding: 1rem 1.25rem 2rem;
+  padding: 0.4rem 0;
 }
 .nav-drawer__list li + li { border-top: 1px solid rgba(242,235,221,0.12); }
 .nav-drawer__list a {
   display: block;
-  padding: 1rem 0.25rem;
+  padding: 0.85rem 1.1rem;
   color: var(--chalk);
   text-decoration: none;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 .nav-drawer__list a:hover,
 .nav-drawer__list a[aria-current="page"] { color: var(--brass); }
@@ -390,14 +388,21 @@ a:hover { color: var(--kumkum); }
   .nav-drawer {
     position: static;
     inset: auto;
+    grid-column: 2;
+    justify-self: center;
     transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     background: none;
     color: inherit;
+    box-shadow: none;
     overflow: visible;
     z-index: auto;
     min-width: 0;
+    max-height: none;
+    width: auto;
   }
-  .nav-drawer__top, .nav-drawer__close { display: none; }
   .nav-drawer__list {
     display: flex;
     flex-wrap: wrap;
@@ -914,6 +919,15 @@ a:hover { color: var(--kumkum); }
   margin: 2rem auto;
 }
 .diagram img { border-radius: var(--radius); border: 1px solid var(--chalk-dim); }
+.diagram__caption {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--jackfruit-ink);
+  border-top: 1px dashed var(--chalk-dim);
+  margin: 0.9rem 0 0;
+  padding-top: 0.9rem;
+}
 .diagram__labels { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
 .diagram__labels li { font-size: 0.9rem; }
 .diagram__labels b { font-family: var(--font-mono); color: var(--jackfruit-ink); }

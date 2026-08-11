@@ -1,38 +1,43 @@
 /**
- * main.js — interactive behavior shared across pages: the mobile nav drawer
- * and the home page hero carousel (with its tala-ring indicator). Content
- * itself is rendered by render.js; this file only wires up interaction once
- * that content exists.
+ * main.js — interactive behavior shared across pages: the mobile nav
+ * dropdown and the home page hero carousel (with its tala-ring indicator).
+ * Content itself is rendered by render.js; this file only wires up
+ * interaction once that content exists.
  */
 
 function initNavDrawer() {
   const drawer = document.getElementById("nav-drawer");
   const openBtn = document.getElementById("menu-open");
-  const closeBtn = document.getElementById("menu-close");
-  if (!drawer || !openBtn || !closeBtn) return;
+  if (!drawer || !openBtn) return;
 
+  function isOpen() {
+    return drawer.classList.contains("is-open");
+  }
   function open() {
     drawer.classList.add("is-open");
     openBtn.setAttribute("aria-expanded", "true");
-    closeBtn.focus();
-    document.body.style.overflow = "hidden";
+    const firstLink = drawer.querySelector("a");
+    if (firstLink) firstLink.focus();
   }
-  function close() {
+  function close({ refocusToggle = false } = {}) {
     drawer.classList.remove("is-open");
     openBtn.setAttribute("aria-expanded", "false");
-    openBtn.focus();
-    document.body.style.overflow = "";
+    if (refocusToggle) openBtn.focus();
   }
-  openBtn.addEventListener("click", open);
-  closeBtn.addEventListener("click", close);
-  drawer.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
+  openBtn.addEventListener("click", () => (isOpen() ? close() : open()));
+  drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => close()));
+  document.addEventListener("keydown", (e) => {
+    if (!isOpen()) return;
+    if (e.key === "Escape") close({ refocusToggle: true });
   });
-  drawer.querySelectorAll("a").forEach((a) =>
-    a.addEventListener("click", () => {
-      if (window.innerWidth < 960) close();
-    })
-  );
+  document.addEventListener("click", (e) => {
+    if (!isOpen()) return;
+    if (drawer.contains(e.target) || openBtn.contains(e.target)) return;
+    close();
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 960) close();
+  });
 }
 
 function initHeroCarousel() {

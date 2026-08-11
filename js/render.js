@@ -50,13 +50,6 @@ function renderHeader() {
         <span class="wordmark__text">${CONTENT.theme.titleDisplay}</span>
       </a>
       <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
-        <div class="nav-drawer__top">
-          <span class="wordmark"><span class="wordmark__mark"></span><span class="wordmark__text">${CONTENT.theme.titleDisplay}</span></span>
-          <button class="nav-drawer__close" id="menu-close">
-            <span class="visually-hidden">Close menu</span>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
         <ul class="nav-drawer__list">
           ${navLinks}
           ${livestreamNav}
