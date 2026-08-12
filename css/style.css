@@ -537,7 +537,12 @@ a:hover { color: var(--kumkum); }
   width: min(98vw, 900px);
   max-height: 30rem;
   aspect-ratio: 1630 / 965;
-  margin-top: -4.5rem;
+  margin-top: -1.5rem;
+}
+@media (max-width: 59.99rem) {
+  .hero__slide[data-slide-index="1"] .hero__text-col {
+    margin-bottom: 0.75rem;
+  }
 }
 .hero__slide[data-slide-index="2"] .hero__portrait {
   aspect-ratio: 1672 / 941;
@@ -625,6 +630,7 @@ a:hover { color: var(--kumkum); }
   .hero__stage { height: 50rem; }
   .hero__portrait { width: min(30vw, 320px); }
   .hero__text-col { max-width: 34rem; margin-bottom: -2.5rem; }
+  .hero__slide[data-slide-index="1"] .hero__portrait { margin-top: -4.5rem; }
   .event-strip .container { grid-template-columns: repeat(3, 1fr) auto; align-items: center; }
 }
 
@@ -834,6 +840,9 @@ a:hover { color: var(--kumkum); }
   margin: 0 auto 1rem;
   border: 3px solid var(--chalk-dim);
   background: var(--syahi);
+}
+.person-card__photo-frame--blank {
+  background: #ffffff;
 }
 .person-card__photo {
   width: 100%;

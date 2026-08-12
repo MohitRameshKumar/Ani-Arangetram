@@ -9,9 +9,9 @@
 const NAV_ITEMS = [
   { href: "index.html", label: "Home", page: "home" },
   { href: "about.html", label: "About", page: "about" },
+  { href: "guru.html", label: "Guru", page: "guru" },
   { href: "program.html", label: "Program", page: "program" },
   { href: "artists.html", label: "Artists", page: "artists" },
-  { href: "guru.html", label: "Guru", page: "guru" },
   { href: "gallery.html", label: "Gallery", page: "gallery" },
   { href: "contact.html", label: "Contact", page: "contact" },
 ];
@@ -87,9 +87,9 @@ function renderFooter() {
         <div>
           <h4>Explore</h4>
           <ul>
+            <li><a href="guru.html">Guru</a></li>
             <li><a href="program.html">Program</a></li>
             <li><a href="artists.html">Artists</a></li>
-            <li><a href="guru.html">Guru</a></li>
             <li><a href="gallery.html">Gallery</a></li>
           </ul>
         </div>
@@ -288,8 +288,8 @@ function renderArtists() {
     .map(
       (a, i) => `
       <li class="person-card" data-artist-index="${i}">
-        <div class="person-card__photo-frame">
-          <img class="person-card__photo" src="${a.photo}" alt="${a.photoAlt}" width="640" height="640" loading="lazy">
+        <div class="person-card__photo-frame${a.photo ? "" : " person-card__photo-frame--blank"}">
+          ${a.photo ? `<img class="person-card__photo" src="${a.photo}" alt="${a.photoAlt}" width="640" height="640" loading="lazy">` : ""}
         </div>
         <h3>${a.name}</h3>
         <p class="person-card__instrument">${a.instrument} — ${a.role}</p>
