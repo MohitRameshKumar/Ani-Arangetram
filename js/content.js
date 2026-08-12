@@ -158,12 +158,12 @@ const CONTENT = {
       bio: "Vidwan Dr. Shivkumar Bhat leads the melodic voice of tonight's Carnatic concert, shaping the ragam and lyrical expression to which the ensemble responds.",
     },
     {
-      name: "Vidwan V. V. Ravi",
+      name: "Vidwan VV Ravi",
       instrument: "Violin",
       role: "Accompanying Artist",
       photo: "images/violin.jpg",
-      photoAlt: "Portrait of violinist Vidwan V. V. Ravi",
-      bio: "Vidwan V. V. Ravi joins on violin, echoing and extending the vocalist's melodic ideas through the improvisational conversation at the heart of Carnatic music.",
+      photoAlt: "Portrait of violinist Vidwan VV Ravi",
+      bio: "Vidwan VV Ravi joins on violin, echoing and extending the vocalist's melodic ideas through the improvisational conversation at the heart of Carnatic music.",
     },
     {
       name: "Vidwan Ajay Gopi",
