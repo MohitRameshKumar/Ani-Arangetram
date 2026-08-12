@@ -80,7 +80,7 @@ function initHeroCarousel() {
 
   function startTimer() {
     stopTimer();
-    if (playing) timer = setInterval(next, 7000);
+    if (playing) timer = setInterval(next, 4500);
   }
   function stopTimer() {
     if (timer) clearInterval(timer);

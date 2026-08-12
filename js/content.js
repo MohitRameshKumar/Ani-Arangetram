@@ -194,9 +194,9 @@ const CONTENT = {
   // Ani's other guru, shown beneath his primary guru on the Guru page.
   secondaryGurus: [
     {
-      name: "Ajay Gopi",
+      name: "Sri Ajay Gopi",
       photo: "images/Ajay.jpg",
-      photoAlt: "Portrait of Ajay Gopi",
+      photoAlt: "Portrait of Sri Ajay Gopi",
       bioParagraphs: [
         "Ajay is a disciple of his father, Sri Gopi Lakshminarayanan, and Sri Kallidaikurichi Sivakumar. He frequently accompanies established musicians on the mridangam at renowned venues across the USA and India, and also received foundational training in the kanjira from Sri Papanasam Sethuraman. In addition to his work as an accompanist, Ajay is a passionate Carnatic vocalist and currently trains under the guidance of Sri Kolkata Vijayaraghavan.",
         "A graduate of UC Berkeley, Ajay is also the founder of Laya of Berkeley and RagaN, organizations dedicated to fostering a deeper appreciation of Carnatic music among diverse audiences. He has been training Aniruth for his mridangam arangetram and is a great pillar of support for him.",
