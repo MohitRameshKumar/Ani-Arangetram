@@ -305,7 +305,10 @@ function renderGuru() {
   const g = CONTENT.guru;
   mount.innerHTML = `
     <div class="guru-hero">
-      <img class="guru-hero__photo" src="${g.photo}" alt="${g.photoAlt}" width="1200" height="1662" loading="lazy">
+      <div class="guru-hero__photo-stack">
+        <img class="guru-hero__photo" src="${g.photo}" alt="${g.photoAlt}" width="1200" height="1550" loading="lazy">
+        ${g.photo2 ? `<img class="guru-hero__photo" src="${g.photo2}" alt="${g.photo2Alt}" width="1600" height="1067" loading="lazy">` : ""}
+      </div>
       <div>
         <h2>${g.name}</h2>
         <h3>Lineage</h3>
@@ -314,6 +317,18 @@ function renderGuru() {
         <p>${g.teachingParagraph}</p>
       </div>
     </div>
+    ${(CONTENT.secondaryGurus || [])
+      .map(
+        (sg) => `
+    <div class="guru-hero guru-hero--secondary">
+      <img class="guru-hero__photo" src="${sg.photo}" alt="${sg.photoAlt}" width="1200" height="1662" loading="lazy">
+      <div>
+        <h2>${sg.name}</h2>
+        ${sg.bioParagraphs.map((para) => `<p>${para}</p>`).join("")}
+      </div>
+    </div>`
+      )
+      .join("")}
     <div class="guru-quote">
       <h3>${g.wordsAboutStudentHeading}</h3>
       <p>${g.wordsAboutStudent}</p>

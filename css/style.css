@@ -486,7 +486,7 @@ a:hover { color: var(--kumkum); }
   position: relative;
   display: flex;
   justify-content: center;
-  height: clamp(36rem, 92vw, 44rem);
+  height: clamp(40rem, 92vw, 44rem);
 }
 .hero__slides {
   position: relative;
@@ -539,10 +539,16 @@ a:hover { color: var(--kumkum); }
   aspect-ratio: 1630 / 965;
   margin-top: -1.5rem;
 }
-@media (max-width: 59.99rem) {
-  .hero__slide[data-slide-index="1"] .hero__text-col {
-    margin-bottom: 0.75rem;
-  }
+.hero__slide[data-slide-index="0"] .hero__text-col {
+  margin-bottom: 0.25rem;
+}
+.hero__slide[data-slide-index="1"] .hero__text-col {
+  margin-bottom: 1.25rem;
+}
+.hero__slide[data-slide-index="1"] .hero__portrait {
+  margin-inline: -1.25rem;
+  width: calc(100% + 2.5rem);
+  max-width: calc(100% + 2.5rem);
 }
 .hero__slide[data-slide-index="2"] .hero__portrait {
   aspect-ratio: 1672 / 941;
@@ -630,7 +636,17 @@ a:hover { color: var(--kumkum); }
   .hero__stage { height: 50rem; }
   .hero__portrait { width: min(30vw, 320px); }
   .hero__text-col { max-width: 34rem; margin-bottom: -2.5rem; }
-  .hero__slide[data-slide-index="1"] .hero__portrait { margin-top: -4.5rem; }
+  .hero__slide[data-slide-index="0"] .hero__text-col {
+    margin-bottom: 1rem;
+  }
+  .hero__slide[data-slide-index="1"] .hero__text-col {
+    margin-bottom: 0.5rem;
+  }
+  .hero__slide[data-slide-index="1"] .hero__portrait {
+    margin-inline: 0;
+    margin-top: 0;
+    width: min(44vw, 720px);
+  }
   .event-strip .container { grid-template-columns: repeat(3, 1fr) auto; align-items: center; }
 }
 
@@ -868,6 +884,11 @@ a:hover { color: var(--kumkum); }
   display: grid;
   gap: 2rem;
 }
+.guru-hero__photo-stack {
+  display: grid;
+  gap: 1rem;
+  max-width: 26rem;
+}
 .guru-hero__photo {
   width: 100%;
   height: auto;
@@ -876,6 +897,11 @@ a:hover { color: var(--kumkum); }
   border: 1px solid var(--chalk-dim);
 }
 @media (min-width: 55rem) { .guru-hero { grid-template-columns: 0.8fr 1.2fr; align-items: start; } }
+.guru-hero--secondary {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--chalk-dim);
+}
 .guru-quote {
   background: var(--syahi);
   color: var(--chalk);

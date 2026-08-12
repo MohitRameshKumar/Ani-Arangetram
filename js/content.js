@@ -180,14 +180,29 @@ const CONTENT = {
   // card. Include the guru's own words about Ani if at all possible.
   // ---------------------------------------------------------------------
   guru: {
-    name: "Gopi Lakshminarayanan",
+    name: "Vidwan Sri Gopi Lakshminarayanan",
     photo: "images/guru-ani-portrait.jpg",
     photoAlt: "Guru Gopi Lakshminarayanan with Ani and a fellow student",
+    photo2: "images/guru.jpg",
+    photo2Alt: "Guru Gopi Lakshminarayanan on stage",
     lineageParagraph: "Sri Gopi Lakshminarayanan is a disciple of the late Sri Kumbakonam Narayanaswamy Iyer and continues his advanced learning with Sri Thanjavur Ramdoss, a disciple of Sri Palghat Mani Iyer. Through this lineage, the guru–shishya tradition carries Carnatic rhythm from one generation to the next through close listening, demonstration, correction, and trust.",
     teachingParagraph: "Gopi leads the Sharadha School of Thala Vadhya in Fremont and has taught young percussionists in the Bay Area for more than a decade. From Ani's earliest playful lessons to his work accompanying singers on stage, he has helped Ani develop discipline, adaptability, and a strong sense of kala pramanam — the steady command of tempo that anchors an ensemble.",
     wordsAboutStudentHeading: "A journey shaped by guidance",
     wordsAboutStudent: "Tonight celebrates not only a performance, but years of patient learning between guru and student. Every phrase Ani plays carries that shared work forward.",
   },
+
+  // Ani's other guru, shown beneath his primary guru on the Guru page.
+  secondaryGurus: [
+    {
+      name: "Ajay Gopi",
+      photo: "images/Ajay.jpg",
+      photoAlt: "Portrait of Ajay Gopi",
+      bioParagraphs: [
+        "Ajay is a disciple of his father, Sri Gopi Lakshminarayanan, and Sri Kallidaikurichi Sivakumar. He frequently accompanies established musicians on the mridangam at renowned venues across the USA and India, and also received foundational training in the kanjira from Sri Papanasam Sethuraman. In addition to his work as an accompanist, Ajay is a passionate Carnatic vocalist and currently trains under the guidance of Sri Kolkata Vijayaraghavan.",
+        "A graduate of UC Berkeley, Ajay is also the founder of Laya of Berkeley and RagaN, organizations dedicated to fostering a deeper appreciation of Carnatic music among diverse audiences. He has been training Aniruth for his mridangam arangetram and is a great pillar of support for him.",
+      ],
+    },
+  ],
 
   // ---------------------------------------------------------------------
   // CHIEF GUEST / GUEST OF HONOR PAGE
