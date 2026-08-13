@@ -71,9 +71,35 @@ function doPost(e) {
     }
     return handlePublicSubmission_(e);
   } catch (err) {
+    logError_("doPost threw", err);
     notifyError_("doPost threw", err);
-    return jsonResponse_({ ok: false, error: "server_error" });
+    return jsonResponse_({ ok: false, error: classifyError_(err) });
   }
+}
+
+/**
+ * Logs the real exception to the Executions log (console.error surfaces in
+ * the execution details panel), since letting it escape as a bare 500 or a
+ * generic client response makes failures unfindable after the fact.
+ */
+function logError_(context, err) {
+  console.error(context + ": " + (err && err.message ? err.message : String(err)));
+  if (err && err.stack) console.error(err.stack);
+}
+
+/**
+ * Maps a caught exception to a coarse, stable code for the client response.
+ * The client only ever branches on { ok: true/false } — see js/wish-submit.js
+ * — so this is purely for debugging via the network tab, not user-facing copy.
+ */
+function classifyError_(err) {
+  var msg = (err && err.message) || String(err);
+  if (/^Missing Script Property/.test(msg)) return "missing_property";
+  if (/No sheet named/.test(msg)) return "sheet_not_found";
+  if (/Authorization is required/i.test(msg)) return "auth_required";
+  if (/invoked too many times|quota/i.test(msg)) return "quota_exceeded";
+  if (/permission/i.test(msg)) return "permission_denied";
+  return "server_error";
 }
 
 // ---------------------------------------------------------------------
@@ -169,6 +195,7 @@ function handleModerationAction_(token, action) {
       setRowStatus_(row.rowIndex, "approved");
       return htmlResponse_(pageShell_("Wish approved", "<p><strong>" + escapeHtml_(row.name) + "</strong>'s wish has been published. It should appear on the site within a minute or two.</p>"));
     } catch (err) {
+      logError_("Approve failed for token " + token, err);
       notifyError_("Approve failed for token " + token, err);
       return htmlResponse_(pageShell_("Something went wrong", "<p>The wish was <strong>not</strong> published. You've been emailed the error — the row is still pending in the Sheet, so you can try the Approve link again.</p>"));
     }
@@ -355,7 +382,7 @@ function notifyError_(context, err) {
       body: context + "\n\n" + (err && err.stack ? err.stack : String(err)),
     });
   } catch (e2) {
-    // If even the error email fails, there's nothing further we can do here.
+    console.error("notifyError_ itself failed to send: " + (e2 && e2.message ? e2.message : String(e2)));
   }
 }
 
