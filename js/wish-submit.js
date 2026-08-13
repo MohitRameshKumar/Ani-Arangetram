@@ -199,8 +199,22 @@ function initWishSubmit() {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload),
+      redirect: "follow",
     })
-      .then((r) => r.json())
+      .then((r) =>
+        r.text().then((text) => {
+          if (!r.ok) {
+            console.error("Wish submission: HTTP " + r.status + " response:", text);
+            throw new Error("wish_submit_http_" + r.status);
+          }
+          try {
+            return JSON.parse(text);
+          } catch (parseErr) {
+            console.error("Wish submission: response was not valid JSON:", text);
+            throw parseErr;
+          }
+        })
+      )
       .then((data) => {
         submitBtn.disabled = false;
         if (data && data.ok) {
@@ -208,10 +222,12 @@ function initWishSubmit() {
           updateCount();
           setStatus("Thank you — your wish will appear once the family has approved it.", "success");
         } else {
+          console.error("Wish submission: server reported failure:", data);
           showFallback();
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("Wish submission failed:", err);
         submitBtn.disabled = false;
         showFallback();
       });
