@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: "program.html", label: "Program", page: "program" },
   { href: "artists.html", label: "Artists", page: "artists" },
   { href: "gallery.html", label: "Gallery", page: "gallery" },
+  { href: "blessings.html", label: "Wishes", page: "blessings" },
   { href: "contact.html", label: "Contact", page: "contact" },
 ];
 
@@ -91,6 +92,7 @@ function renderFooter() {
             <li><a href="program.html">Program</a></li>
             <li><a href="artists.html">Artists</a></li>
             <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blessings.html">Wishes</a></li>
           </ul>
         </div>
         <div>
@@ -196,6 +198,31 @@ function renderParentsWelcome() {
   `;
 }
 
+const BLESSING_SNIPPET_LENGTH = 120;
+
+function blessingSnippet(message) {
+  if (message.length <= BLESSING_SNIPPET_LENGTH) return null;
+  const cut = message.slice(0, BLESSING_SNIPPET_LENGTH);
+  return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+}
+
+function blessingCardMarkup(b, i) {
+  const snippet = blessingSnippet(b.message);
+  if (!snippet) {
+    return `
+      <li class="blessing-card">
+        <p>&ldquo;${b.message}&rdquo;</p>
+        <cite>${b.name}</cite>
+      </li>`;
+  }
+  return `
+      <li class="blessing-card">
+        <p>&ldquo;${snippet}&rdquo;</p>
+        <cite>${b.name}</cite>
+        <button type="button" class="blessing-card__open" data-blessing-index="${i}">Read full wish</button>
+      </li>`;
+}
+
 function renderBlessingsPreview() {
   const mount = document.getElementById("blessings-preview");
   if (!mount) return;
@@ -205,15 +232,7 @@ function renderBlessingsPreview() {
     if (section) section.hidden = true;
     return;
   }
-  mount.innerHTML = preview
-    .map(
-      (b) => `
-      <li class="blessing-card">
-        <p>&ldquo;${b.message}&rdquo;</p>
-        <cite>${b.name}, ${b.relation}</cite>
-      </li>`
-    )
-    .join("");
+  mount.innerHTML = preview.map((b, i) => blessingCardMarkup(b, i)).join("");
 }
 
 function renderBlessingsFull() {
@@ -223,15 +242,7 @@ function renderBlessingsFull() {
     mount.innerHTML = '<li class="card"><p>Wishes from friends and family will be added here as the celebration approaches.</p></li>';
     return;
   }
-  mount.innerHTML = CONTENT.blessings
-    .map(
-      (b) => `
-      <li class="blessing-card">
-        <p>&ldquo;${b.message}&rdquo;</p>
-        <cite>${b.name}, ${b.relation}</cite>
-      </li>`
-    )
-    .join("");
+  mount.innerHTML = CONTENT.blessings.map((b, i) => blessingCardMarkup(b, i)).join("");
 }
 
 function renderProgramOrder() {
