@@ -33,7 +33,7 @@
 var SHEET_NAME = "Wishes";
 var MAX_NAME_LEN = 60;
 var MAX_RELATIONSHIP_LEN = 60;
-var MAX_MESSAGE_LEN = 600;
+var MAX_MESSAGE_LEN = 2000;
 var MIN_FORM_MS = 3000;
 var RATE_LIMIT_MAX = 15; // max submissions per window, across all senders
 var RATE_LIMIT_WINDOW_SECONDS = 600; // 10 minutes

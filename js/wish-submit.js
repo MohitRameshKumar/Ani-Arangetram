@@ -22,7 +22,7 @@ const WISH_SUBMIT_URL = "https://script.google.com/macros/s/AKfycbyqaanHaGQpjkDn
 // address would otherwise be exposed to spam scrapers on a public page.
 const WISH_FALLBACK_EMAIL = "";
 
-const WISH_LIMITS = { name: 60, relationship: 60, message: 600 };
+const WISH_LIMITS = { name: 60, relationship: 60, message: 2000 };
 
 function initWishSubmit() {
   const modal = document.getElementById("wish-submit");
@@ -138,7 +138,7 @@ function initWishSubmit() {
       return { ok: false, error: "Please enter your relationship to Ani (60 characters or fewer)." };
     }
     if (!message || message.length > WISH_LIMITS.message) {
-      return { ok: false, error: "Please enter a wish between 1 and 600 characters." };
+      return { ok: false, error: "Please enter a wish between 1 and 2000 characters." };
     }
     return { ok: true, name, relationship, message };
   }

@@ -879,6 +879,8 @@ a:hover { color: var(--kumkum); }
 }
 .wish-lightbox__panel p { font-style: italic; font-size: 1.1rem; max-width: none; }
 .wish-lightbox__panel cite { display: block; margin-top: 1rem; font-style: normal; font-family: var(--font-mono); font-size: 0.85rem; color: var(--jackfruit-ink); }
+#person-lightbox-instrument { margin-bottom: 1rem; }
+#person-lightbox-bio p { font-style: normal; font-size: 1rem; max-width: none; }
 .wish-lightbox__close, .wish-lightbox__prev, .wish-lightbox__next {
   position: absolute;
   background: none;
@@ -985,6 +987,21 @@ a:hover { color: var(--kumkum); }
   color: var(--jackfruit-ink);
 }
 .person-card p { text-align: left; margin-top: 0.75rem; font-size: 0.92rem; }
+.person-card__open {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--jackfruit-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 
 .guru-hero {
   display: grid;

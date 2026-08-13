@@ -25,10 +25,22 @@
     </section>
   </main>
 
+  <div class="wish-lightbox" id="person-lightbox" role="dialog" aria-modal="true" aria-label="Artist bio reader">
+    <button class="wish-lightbox__close" id="person-lightbox-close"><span class="visually-hidden">Close</span><span aria-hidden="true">&times;</span></button>
+    <button class="wish-lightbox__prev" id="person-lightbox-prev"><span class="visually-hidden">Previous artist</span><span aria-hidden="true">&larr;</span></button>
+    <button class="wish-lightbox__next" id="person-lightbox-next"><span class="visually-hidden">Next artist</span><span aria-hidden="true">&rarr;</span></button>
+    <div class="wish-lightbox__panel">
+      <h3 id="person-lightbox-name"></h3>
+      <div class="person-card__instrument" id="person-lightbox-instrument"></div>
+      <div id="person-lightbox-bio"></div>
+    </div>
+  </div>
+
   <footer class="site-footer" id="site-footer"></footer>
 
   <script src="js/content.js"></script>
   <script src="js/render.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/artist-bio.js"></script>
 </body>
 </html>

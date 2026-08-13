@@ -246,21 +246,32 @@ function renderAniStory() {
   mount.innerHTML = CONTENT.aniStory.paragraphs.map((p) => `<p>${p}</p>`).join("");
 }
 
+const PERSON_SNIPPET_LENGTH = 200;
+
+function personSnippet(bio) {
+  const flat = bio.replace(/\n+/g, " ");
+  if (flat.length <= PERSON_SNIPPET_LENGTH) return null;
+  const cut = flat.slice(0, PERSON_SNIPPET_LENGTH);
+  return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+}
+
 function renderArtists() {
   const mount = document.getElementById("artist-cards");
   if (!mount) return;
   mount.innerHTML = CONTENT.artists
-    .map(
-      (a, i) => `
+    .map((a, i) => {
+      const snippet = personSnippet(a.bio);
+      return `
       <li class="person-card" data-artist-index="${i}">
         <div class="person-card__photo-frame${a.photo ? "" : " person-card__photo-frame--blank"}">
           ${a.photo ? `<img class="person-card__photo" src="${a.photo}" alt="${a.photoAlt}" width="640" height="640" loading="lazy">` : ""}
         </div>
         <h3>${a.name}</h3>
         <p class="person-card__instrument">${a.instrument} — ${a.role}</p>
-        <p>${a.bio}</p>
-      </li>`
-    )
+        <p>${snippet || a.bio}</p>
+        ${snippet ? `<button type="button" class="person-card__open" data-artist-index="${i}">Read more</button>` : ""}
+      </li>`;
+    })
     .join("");
 }
 
