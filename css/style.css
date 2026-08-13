@@ -802,6 +802,66 @@ a:hover { color: var(--kumkum); }
   text-underline-offset: 0.2em;
 }
 
+/* Blessings toolbar — the "+ Leave a wish" trigger above the guestbook list */
+.blessings-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+/* Wish submit modal — a form dialog matching the wish-lightbox reader idiom */
+.wish-submit {
+  position: fixed; inset: 0; background: rgba(20,16,12,0.94);
+  display: none; align-items: center; justify-content: center;
+  z-index: 300; padding: 1.5rem;
+}
+.wish-submit[hidden] { display: none; }
+.wish-submit.is-open { display: flex; }
+.wish-submit__panel {
+  background: var(--chalk);
+  border-radius: var(--radius);
+  max-width: 32rem;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+}
+.wish-submit__panel h2 { margin-bottom: 0.5rem; }
+.wish-submit__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 2px solid var(--syahi);
+  color: var(--syahi);
+  border-radius: 999px;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.wish-submit__actions { margin-top: 1.5rem; }
+.wish-submit__actions .btn { width: 100%; justify-content: center; }
+.wish-submit__actions .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+#wish-submit-status { min-height: 1.2em; }
+#wish-submit-status.is-error { color: var(--kumkum); }
+#wish-submit-status.is-success { color: var(--jackfruit-ink); }
+@media (max-width: 26rem) {
+  .wish-submit { padding: 0.75rem; }
+  .wish-submit__panel { padding: 1.5rem; }
+}
+
+/* Honeypot — present in the DOM for bots, invisible and unreachable for people */
+.wish-honeypot {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0; padding: 0; margin: -1px;
+}
+
 /* Wish lightbox — full-screen reader for a wish, opened from a blessing card */
 .wish-lightbox {
   position: fixed; inset: 0; background: rgba(20,16,12,0.94);

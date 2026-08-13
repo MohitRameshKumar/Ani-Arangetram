@@ -26,7 +26,17 @@
     <div class="tala-divider" aria-hidden="true"><span class="tala-divider__arc"></span></div>
 
     <section class="section container">
-      <ul class="card-grid" id="blessings-full" style="list-style:none;padding:0;"></ul>
+      <div class="blessings-toolbar">
+        <button type="button" class="btn btn--solid" id="wish-add-open">+ Leave a wish</button>
+      </div>
+      <ul class="card-grid" id="blessings-full" style="list-style:none;padding:0;">
+        <!-- WISHES:START -->
+        <li class="blessing-card">
+          <p>&ldquo;I have had the joy of watching you grow since first grade, and over the years, I have watched those little fingers turn into what I can only describe as a beautiful, perfectly coordinated dance on the mridangam. I may have zero musical knowledge, but I have always been amazed by your magic. What I admire even more is that you are never shy about playing whenever we ask, even when you are tired. Your passion, patience, and dedication have always been wonderful to watch. As you celebrate this very special milestone, I wish you continued success and many more years of making music and sharing your talent with others. May you always play with the same joy and enthusiasm I have seen in you since you were little. You will always have my love, blessings, and very best wishes for a bright and successful future.&rdquo;</p>
+          <cite>Gina Aunty (Big Giiiii)</cite>
+        </li>
+        <!-- WISHES:END -->
+      </ul>
     </section>
   </main>
 
@@ -40,11 +50,43 @@
     </div>
   </div>
 
+  <div class="wish-submit" id="wish-submit" role="dialog" aria-modal="true" aria-labelledby="wish-submit-heading" hidden>
+    <div class="wish-submit__panel">
+      <button type="button" class="wish-submit__close" id="wish-submit-close"><span class="visually-hidden">Close</span><span aria-hidden="true">&times;</span></button>
+      <h2 id="wish-submit-heading">Leave a wish for Ani</h2>
+      <p>Wishes are reviewed by the family before they appear on the site.</p>
+      <form id="wish-submit-form" novalidate>
+        <div class="form-field">
+          <label for="wish-name">Your name</label>
+          <input type="text" id="wish-name" name="name" maxlength="60" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="wish-relationship">Relationship to Ani</label>
+          <input type="text" id="wish-relationship" name="relationship" maxlength="60" required placeholder="e.g. Uncle, Fellow student of the guru">
+        </div>
+        <div class="form-field">
+          <label for="wish-message">Your wish</label>
+          <textarea id="wish-message" name="message" maxlength="600" rows="5" required></textarea>
+          <p class="form-note"><span id="wish-message-count">600</span> characters left</p>
+        </div>
+        <div class="wish-honeypot" aria-hidden="true">
+          <label for="wish-website">Leave this field blank</label>
+          <input type="text" id="wish-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="form-note" id="wish-submit-status" role="status" aria-live="polite"></p>
+        <div class="wish-submit__actions">
+          <button type="submit" class="btn btn--solid" id="wish-submit-button">Send wish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer class="site-footer" id="site-footer"></footer>
 
   <script src="js/content.js"></script>
   <script src="js/render.js"></script>
   <script src="js/main.js"></script>
   <script src="js/wishes.js"></script>
+  <script src="js/wish-submit.js"></script>
 </body>
 </html>

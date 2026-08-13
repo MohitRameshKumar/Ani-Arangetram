@@ -117,16 +117,11 @@ const CONTENT = {
   },
 
   // ---------------------------------------------------------------------
-  // BLESSINGS — seeded wishes shown as a preview on the home page and in
-  // full on blessings.html. Vary length and voice; these should read like
-  // different people actually wrote them.
+  // BLESSINGS — wishes now live as static HTML, not here. See the
+  // <!-- WISHES:START --> / <!-- WISHES:END --> block in blessings.html
+  // (approved via the moderation workflow) and the hand-picked preview
+  // cards in index.html. See SETUP.md for how new wishes get approved.
   // ---------------------------------------------------------------------
-  blessings: [
-    {
-      name: "Gina Aunty (Big Giiiii)",
-      message: "I have had the joy of watching you grow since first grade, and over the years, I have watched those little fingers turn into what I can only describe as a beautiful, perfectly coordinated dance on the mridangam. I may have zero musical knowledge, but I have always been amazed by your magic. What I admire even more is that you are never shy about playing whenever we ask, even when you are tired. Your passion, patience, and dedication have always been wonderful to watch. As you celebrate this very special milestone, I wish you continued success and many more years of making music and sharing your talent with others. May you always play with the same joy and enthusiasm I have seen in you since you were little. You will always have my love, blessings, and very best wishes for a bright and successful future.",
-    },
-  ],
 
   // ---------------------------------------------------------------------
   // ABOUT PAGE — Ani's own training story. Keep it concrete: ages, names

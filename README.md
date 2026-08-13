@@ -28,8 +28,8 @@ Then open `http://localhost:8000` in a browser. That's it — every page is a pl
 A few conventions used throughout `content.js` and the `.html` files:
 
 - **`[Text in square brackets]`** is a placeholder — a real fact that hasn't been decided yet (a date, a name, a bio). Replace the whole bracketed instruction with the real text, including removing the brackets.
-- **`{{TEXT_LIKE_THIS}}`** marks something that lives directly in an `.html` file instead of `content.js` — search for that exact token across the `.html` files to find and fix it. There are two: `{{CONFIRM_TITLE_WITH_GURU}}` (in `index.html`, a comment near the top of `<main>`) and `{{FORMSPREE_ENDPOINT}}` (in `blessings.html` — see "Blessings form" below).
-- Arrays like `programPieces`, `artists`, `blessings`, and `gallery` are lists — copy an existing entry (including its `{` and `}` braces and the comma after it) to add a new one, or delete an entry entirely to remove it. The page rebuilds itself from whatever is in the list; you never need to edit the `.html`.
+- **`{{TEXT_LIKE_THIS}}`** marks something that lives directly in an `.html` file instead of `content.js` — search for that exact token across the `.html` files to find and fix it. There's one: `{{CONFIRM_TITLE_WITH_GURU}}` (in `index.html`, a comment near the top of `<main>`).
+- Arrays like `programPieces`, `artists`, and `gallery` are lists — copy an existing entry (including its `{` and `}` braces and the comma after it) to add a new one, or delete an entry entirely to remove it. The page rebuilds itself from whatever is in the list; you never need to edit the `.html`. **Wishes are the one exception** — see "Blessings form & moderation" below.
 
 ### Example: changing the event date
 
@@ -80,20 +80,11 @@ Every `<img>` tag in the HTML already has the correct `width`, `height`, and `lo
 
 ## Blessings form & moderation
 
-`blessings.html` has a real HTML `<form>` that currently points at a placeholder: `action="{{FORMSPREE_ENDPOINT}}"`. To make it actually deliver submissions:
+Guests submit wishes from a "+ Leave a wish" button on `blessings.html`. Nothing they submit appears on the site automatically — it's emailed to the family for Approve/Deny moderation first, and only an approved wish gets committed to the live page.
 
-1. Create a free account at [Formspree](https://formspree.io) (or a similar static-form service, e.g. [Basin](https://usebasin.com) or Netlify Forms if you deploy to Netlify).
-2. Create a new form and copy the endpoint URL it gives you (something like `https://formspree.io/f/abcd1234`).
-3. In `blessings.html`, replace `{{FORMSPREE_ENDPOINT}}` (it appears twice — once in the `action` attribute, once in the note under the button) with that URL.
+This is powered by a small Google Apps Script backend (not part of this repo's deployed site — see `apps-script/Code.gs`), plus a Google Sheet used as the pending-submissions queue. **Setting this up is a one-time, non-programmer-friendly process — see [`SETUP.md`](SETUP.md) for the full walkthrough**, including creating the Sheet, deploying the script, generating a scoped GitHub token, and wiring the resulting URL into `js/wish-submit.js`.
 
-**This site has no live database**, so there's no automatic way for a submitted wish to appear on the page — that's a deliberate moderation step, not a bug. When someone submits the form:
-
-1. You'll get an email/dashboard notification from Formspree with their name, relation, and message.
-2. Read it, and decide whether it's ready to show publicly.
-3. Open `js/content.js`, find the `blessings` list, and add a new entry in the same shape as the existing ones (`name`, `relation`, `message`).
-4. Save and redeploy (see below) — the new wish now appears on the home page preview and the full Blessings page.
-
-The `blessings` list in `content.js` currently ships with a handful of realistic seeded wishes so the guestbook page never looks empty before the first real submissions come in — replace or supplement them as real wishes arrive.
+Wishes are **not** stored in `content.js` — they're static HTML inside `blessings.html`, between `<!-- WISHES:START -->` and `<!-- WISHES:END -->`. Approving a wish (via the email's Approve button) writes it there directly by committing to GitHub, which GitHub Pages then rebuilds automatically. See `SETUP.md` for how to fix a typo in an already-approved wish, remove one, or shut the whole submission workflow down after the event.
 
 ## Deploying
 
@@ -115,9 +106,13 @@ css/style.css                     — the whole design system (palette, type, la
 css/print.css                     — print styles, tuned for program.html
 js/content.js                     — EDIT THIS for all text/data changes
 js/render.js                      — builds header/footer/nav and content-driven
-                                     sections (program list, artist cards, gallery,
-                                     blessings) from content.js — no edits needed
+                                     sections (program list, artist cards, gallery)
+                                     from content.js — no edits needed
 js/main.js                        — mobile nav drawer + hero carousel behavior
 js/gallery.js                     — the photo lightbox
+js/wishes.js                      — the wish-reader lightbox + card truncation
+js/wish-submit.js                 — the "+ Leave a wish" submission form
+apps-script/Code.gs               — wish moderation backend (see SETUP.md)
+SETUP.md                          — one-time setup for wish moderation
 assets/images/                    — all photos (see manifest above)
 ```

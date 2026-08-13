@@ -1,7 +1,8 @@
 /**
  * render.js — reads CONTENT (from content.js) and fills in the parts of each
  * page that are driven by data: the header/footer, the hero, the event strip,
- * the program list, artist cards, the gallery grid, and blessing cards.
+ * the program list, artist cards, and the gallery grid. Blessings are static
+ * HTML now (see js/wishes.js and SETUP.md), not rendered from here.
  * Each page's <body data-page="..."> attribute tells this file which nav item
  * to mark current and which section renderers to run.
  */
@@ -198,53 +199,6 @@ function renderParentsWelcome() {
   `;
 }
 
-const BLESSING_SNIPPET_LENGTH = 120;
-
-function blessingSnippet(message) {
-  if (message.length <= BLESSING_SNIPPET_LENGTH) return null;
-  const cut = message.slice(0, BLESSING_SNIPPET_LENGTH);
-  return cut.slice(0, cut.lastIndexOf(" ")) + "…";
-}
-
-function blessingCardMarkup(b, i) {
-  const snippet = blessingSnippet(b.message);
-  if (!snippet) {
-    return `
-      <li class="blessing-card">
-        <p>&ldquo;${b.message}&rdquo;</p>
-        <cite>${b.name}</cite>
-      </li>`;
-  }
-  return `
-      <li class="blessing-card">
-        <p>&ldquo;${snippet}&rdquo;</p>
-        <cite>${b.name}</cite>
-        <button type="button" class="blessing-card__open" data-blessing-index="${i}">Read full wish</button>
-      </li>`;
-}
-
-function renderBlessingsPreview() {
-  const mount = document.getElementById("blessings-preview");
-  if (!mount) return;
-  const preview = CONTENT.blessings.slice(0, 3);
-  if (!preview.length) {
-    const section = mount.closest("section");
-    if (section) section.hidden = true;
-    return;
-  }
-  mount.innerHTML = preview.map((b, i) => blessingCardMarkup(b, i)).join("");
-}
-
-function renderBlessingsFull() {
-  const mount = document.getElementById("blessings-full");
-  if (!mount) return;
-  if (!CONTENT.blessings.length) {
-    mount.innerHTML = '<li class="card"><p>Wishes from friends and family will be added here as the celebration approaches.</p></li>';
-    return;
-  }
-  mount.innerHTML = CONTENT.blessings.map((b, i) => blessingCardMarkup(b, i)).join("");
-}
-
 function renderProgramOrder() {
   const mount = document.getElementById("program-order");
   if (!mount) return;
@@ -411,8 +365,6 @@ function renderAll() {
   renderArangetramTeaser();
   renderEveningBlocks();
   renderParentsWelcome();
-  renderBlessingsPreview();
-  renderBlessingsFull();
   renderProgramOrder();
   renderProgramPieces();
   renderGratitude();

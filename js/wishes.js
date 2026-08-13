@@ -1,7 +1,34 @@
 /**
  * wishes.js — a small, keyboard-accessible full-screen reader for wishes,
  * opened from a blessing card's "Read full wish" button. Mirrors gallery.js.
+ *
+ * Blessing cards are plain static HTML (see the <!-- WISHES:START --> block
+ * in blessings.html and the preview cards in index.html) — there is no
+ * data array behind them. Long wishes are shown in full in the markup so
+ * the page works with JavaScript disabled; this script visually truncates
+ * them on load and stashes the full text on the card for the lightbox.
  */
+
+const WISH_SNIPPET_LENGTH = 120;
+
+function truncateWishCards() {
+  document.querySelectorAll(".blessing-card").forEach((card) => {
+    if (card.querySelector(".blessing-card__open")) return;
+    const p = card.querySelector("p");
+    if (!p) return;
+    const full = p.textContent.replace(/^[“"]/, "").replace(/[”"]$/, "");
+    if (full.length <= WISH_SNIPPET_LENGTH) return;
+    card.dataset.message = full;
+    const cut = full.slice(0, WISH_SNIPPET_LENGTH);
+    const snippet = cut.slice(0, cut.lastIndexOf(" ")) + "…";
+    p.textContent = `“${snippet}”`;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "blessing-card__open";
+    btn.textContent = "Read full wish";
+    card.appendChild(btn);
+  });
+}
 
 function initWishLightbox() {
   const lightbox = document.getElementById("wish-lightbox");
@@ -13,14 +40,19 @@ function initWishLightbox() {
   const prevBtn = document.getElementById("wish-lightbox-prev");
   const nextBtn = document.getElementById("wish-lightbox-next");
 
+  const cards = Array.from(document.querySelectorAll(".blessing-card"));
   let index = 0;
   let lastFocused = null;
 
   function show(i) {
-    const items = CONTENT.blessings;
-    index = (i + items.length) % items.length;
-    textEl.textContent = `“${items[index].message}”`;
-    citeEl.textContent = items[index].name;
+    if (!cards.length) return;
+    index = (i + cards.length) % cards.length;
+    const card = cards[index];
+    const p = card.querySelector("p");
+    const cite = card.querySelector("cite");
+    const message = card.dataset.message || (p ? p.textContent.replace(/^[“"]/, "").replace(/[”"]$/, "") : "");
+    textEl.textContent = `“${message}”`;
+    citeEl.textContent = cite ? cite.textContent : "";
   }
 
   function open(i) {
@@ -38,9 +70,12 @@ function initWishLightbox() {
   }
 
   document.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-blessing-index]");
+    const btn = e.target.closest(".blessing-card__open");
     if (!btn) return;
-    open(Number(btn.dataset.blessingIndex));
+    const card = btn.closest(".blessing-card");
+    const i = cards.indexOf(card);
+    if (i === -1) return;
+    open(i);
   });
 
   closeBtn.addEventListener("click", close);
@@ -72,5 +107,6 @@ function initWishLightbox() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  truncateWishCards();
   setTimeout(initWishLightbox, 0);
 });
