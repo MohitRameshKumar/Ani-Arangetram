@@ -11,7 +11,6 @@ const NAV_ITEMS = [
   { href: "index.html", label: "Home", page: "home" },
   { href: "about.html", label: "About", page: "about" },
   { href: "guru.html", label: "Guru", page: "guru" },
-  { href: "program.html", label: "Program", page: "program" },
   { href: "artists.html", label: "Artists", page: "artists" },
   { href: "gallery.html", label: "Gallery", page: "gallery" },
   { href: "blessings.html", label: "Wishes", page: "blessings" },
@@ -90,7 +89,6 @@ function renderFooter() {
           <h4>Explore</h4>
           <ul>
             <li><a href="guru.html">Guru</a></li>
-            <li><a href="program.html">Program</a></li>
             <li><a href="artists.html">Artists</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="blessings.html">Wishes</a></li>
@@ -197,42 +195,6 @@ function renderParentsWelcome() {
       <p class="welcome__signoff">${w.signOff}</p>
     </div>
   `;
-}
-
-function renderProgramOrder() {
-  const mount = document.getElementById("program-order");
-  if (!mount) return;
-  mount.innerHTML = CONTENT.programOrder
-    .map(
-      (step) => `
-      <li>
-        ${step.time ? `<span class="program-order__time">${step.time}</span>` : ""}
-        <span class="program-order__item">${step.item}</span>
-        ${step.note ? `<span class="program-order__note">${step.note}</span>` : ""}
-      </li>`
-    )
-    .join("");
-}
-
-function renderProgramPieces() {
-  const mount = document.getElementById("program-pieces");
-  if (!mount) return;
-  mount.innerHTML = CONTENT.programPieces
-    .map(
-      (piece) => `
-      <li class="piece${piece.isThani ? " is-thani" : ""}">
-        ${piece.isThani ? '<span class="piece__thani-tag">Ani\'s Thani Avarthanam</span>' : ""}
-        <h3 class="piece__title">${piece.title}</h3>
-        ${piece.ragam || piece.thalam || piece.composer ? `<dl class="piece__meta">
-          ${piece.ragam ? `<div><dt>Ragam</dt> <dd>${piece.ragam}</dd></div>` : ""}
-          ${piece.thalam ? `<div><dt>Thalam</dt> <dd>${piece.thalam}</dd></div>` : ""}
-          ${piece.composer ? `<div><dt>Composer</dt> <dd>${piece.composer}</dd></div>` : ""}
-        </dl>` : ""}
-        <p class="piece__note">${piece.note}</p>
-        ${piece.lyricLine ? `<p class="piece__lyric">${piece.lyricLine}</p>` : ""}
-      </li>`
-    )
-    .join("");
 }
 
 function renderGratitude() {
@@ -376,8 +338,6 @@ function renderAll() {
   renderArangetramTeaser();
   renderEveningBlocks();
   renderParentsWelcome();
-  renderProgramOrder();
-  renderProgramPieces();
   renderGratitude();
   renderAniStory();
   renderArtists();
