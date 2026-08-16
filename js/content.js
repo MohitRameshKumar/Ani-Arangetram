@@ -194,7 +194,7 @@ const CONTENT = {
   // Ani's other guru, shown beneath his primary guru on the Guru page.
   secondaryGurus: [
     {
-      name: "Sri Ajay Gopi",
+      name: "Vidwan Sri Ajay Gopi",
       photo: "images/Ajay.jpg",
       photoAlt: "Portrait of Sri Ajay Gopi",
       bioParagraphs: [
